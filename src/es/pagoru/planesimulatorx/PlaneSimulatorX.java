@@ -1,18 +1,17 @@
 package es.pagoru.planesimulatorx;
 
-import java.awt.*;
-import java.awt.event.MouseAdapter;
+import java.io.IOException;
 
 /**
  * Created by pablo on 25/10/16.
  */
 public class PlaneSimulatorX {
 
-    public static void main(String[] args){
+    public static Window window;
 
-//        System.out.println("╒══════════════════════════════════════════════════════════════╕");
+    public static void main(String[] args) throws IOException {
 
-        new Gui();
+        window = new Window();
 
     }
 

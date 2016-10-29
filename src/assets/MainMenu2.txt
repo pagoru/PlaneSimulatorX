@@ -1,0 +1,24 @@
+╒════════════════════════════════╤════════════════════════════════════════════════════════════╕
+│                                │                            :Nmmmd                          │
+│         Menú principal         │                           /MMMMM+                          │
+│                                │                          /MMMMMN`                          │
+╞════════════════════════════════╡                         +MMMMMM+                           │
+│                                │                    `yhhhMMMMMMm`                           │
+│  [ ] Donar d'alta un avió      │                     //dMMMMMMM+                            │
+│                                │                   /yyhMMMMMMMm`                       :yyyy│
+│  [*] Gestionar un avió         │                   -oNMMMMMMMM+                      `oNMMMM│
+│                                │                    sMMMMMMMMN`                     .hMMMMs:│
+│  [ ] Manteniment de l'espai    │  `.-/+ooooooooossshMMMMMMMMMmsssssssssssssssso+/:-/NMMMMd``│
+│      aeri                      │:hmNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd:`│
+│                                │/dNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm/`│
+│  [ ] Informació de l'espai     │ `.-/ossyyyyyyyyyyydMMMMMMMMMmhhyyyyyyyyyyyyyyyso/:oNMMMMm..│
+│      aeri                      │                   `yMMMMMMMMm                      .hMMMMmm│
+│                                │                   -/mMMMMMMMM/                       /mMMMM│
+│                                │                   +hhdMMMMMMMm                        .////│
+│                                │                    `:/dMMMMMMM/                            │
+│                                │                    `hhddMMMMMMm                            │
+│                                │                     ````oMMMMMM+                           │
+│                                │                          +MMMMMm`                          │
+│                                │                           +MMMMM+                          │
+│                                │                            /MMMMN`                         │
+╘════════════════════════════════╧════════════════════════════════════════════════════════════╛

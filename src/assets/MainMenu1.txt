@@ -1,0 +1,24 @@
+╒════════════════════════════════╤════════════════════════════════════════════════════════════╕
+│                                │                          +ooooooooosMhoooooooooo.          │
+│         Menú principal         │                        ./mMMMMMMMMMMMMMMMMMMMMMMo:         │
+│                                │                         hMMMhssssssssssssssssMMMM.         │
+╞════════════════════════════════╡                         :MMMh               :MMMh          │
+│                                │                          dMMM.              hMMM:          │
+│  [*] Donar d'alta un avió      │                          /MMMhooooooooooooosMMMd           │
+│                                │                  yddddddddMMMMMMMMMMMMMMMMMMMMMmdddddddd-  │
+│  [ ] Gestionar un avió         │                  :MMMhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhmMMh   │
+│                                │                   yMM+                             `mMN.   │
+│  [ ] Manteniment de l'espai    │                   `NMN`                            sMM+    │
+│      aeri                      │                    /MMy                           -MMd     │
+│                                │                     hMM/..........................mMM-     │
+│  [ ] Informació de l'espai     │  ./+oo+-            .NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMs      │
+│      aeri                      │  .hMMMMMMds/`        -oydmMMMMMMMMMMMMMMMMMMMMMNmhs+`      │
+│                                │    .smMMMMMMMms/:-.`       `yMMMMMMMMMMMMMMMM.`            │
+│                                │       .+ymMMMMMMMMMMMNmdhysooosdMMMMMMMMMMMMM              │
+│                                │           .+mMMMMMMMMMNhooo:+oo+Ndyo+oymMMMMM              │
+│                                │             `NMMMMMMMMMMMNho+o++oydNMMm:hMMMM              │
+│                                │              `-:yMMMMyhNMMMMMMMMMMMMNsomMMMMM              │
+│                                │                  hNMMN/ .:oydmNMMMMN:mMMMMMMM              │
+│                                │                    `/dMh`   +ysoooossMMMMMMMM              │
+│                                │                       :yd/  sMMMMMMMMMMMMMMMM              │
+╘════════════════════════════════╧════════════════════════════════════════════════════════════╛

@@ -1,5 +1,7 @@
 package es.pagoru.planesimulatorx;
 
+import es.pagoru.planesimulatorx.utils.Vector3Di;
+
 /**
  * Created by pablo on 25/10/16.
  */
@@ -65,8 +67,6 @@ public class Plane {
     public float getPitch(){
         return pitch;
     }
-
-
 
     public void setUndercarriage(boolean undercarriage) {
         this.undercarriage = undercarriage;

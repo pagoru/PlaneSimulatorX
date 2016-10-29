@@ -1,4 +1,4 @@
-package es.pagoru.planesimulatorx;
+package es.pagoru.planesimulatorx.utils;
 
 /**
  * Created by pablo on 25/10/16.
