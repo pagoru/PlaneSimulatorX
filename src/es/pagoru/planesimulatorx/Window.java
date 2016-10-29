@@ -20,6 +20,10 @@ public class Window {
         return PlaneSimulatorX.window;
     }
 
+    public static String getWindowString(String path, String charset) throws IOException {
+        return Files.readAllLines(Paths.get("src/assets/" + path + ".txt"), Charset.forName(charset)).stream().collect(Collectors.joining());
+    }
+
     private JTextArea textArea;
     private JFrame frame;
 
@@ -50,7 +54,11 @@ public class Window {
         textArea.setLineWrap(true);
         textArea.setBackground(new Color(0, 0, 0));
         textArea.setForeground(new Color(0, 228, 0));
-        textArea.setFont(loadFont("Consolas").deriveFont(16f));
+        try{
+            textArea.setFont(loadFont("Consolas").deriveFont(16f));
+        } catch (Exception e){
+            textArea.setFont(loadFont("monaco").deriveFont(16f));
+        }
         textArea.addKeyListener(new KeyListenerEvent());
 
         mainPanel.add(textArea);
@@ -79,9 +87,7 @@ public class Window {
     }
 
     public void loadWindow(String path, String charset) throws IOException {
-        String text = Files.readAllLines(Paths.get("src/assets/" + path + ".txt"), Charset.forName(charset)).stream().collect(Collectors.joining());
-        textArea.setText(text);
-        setFirstLoad(false);
+        loadWindow(getWindowString(path, charset));
     }
 
     public void loadWindow(String text){
@@ -95,7 +101,7 @@ public class Window {
 
     private Font loadFont(String name){
         for(Font f : GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()){
-            if(f.getName().equalsIgnoreCase("Consolas")){
+            if(f.getName().equalsIgnoreCase(name)){
                 return f;
             }
         }

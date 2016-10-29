@@ -14,29 +14,32 @@ public class KeyListenerEvent implements KeyListener {
     private static KeyListenerEvent lastKeyboardEvent;
 
     private static void onEvent(KeyListenerEvent keyboardEvent){
+        boolean pressed = keyboardEvent.getKeyOption().equals(KeyOption.PRESSED);
         if(Window.getInstance().isFirstLoad()){
-            MainMenuWindow.INSTANCE.firstLoad();
+            if(!pressed){
+                MainMenuWindow.INSTANCE.firstLoad();
+            }
             return;
         }
         if(!keyboardEvent.equals(lastKeyboardEvent)){
             KeyI keyboardKey = KeyboardEventHandler.getKeyBoardKeyList().stream()
-                    .filter(key -> key.getKeyCode() == keyboardEvent.getKeyCode()
-                            && (key.getKeyOption().equals(keyboardEvent.getKeyOption())
-                            || key.getKeyOption().equals(KeyListenerEvent.KeyOption.BOTH)
-                    ))
+                    .filter(key -> key.getKeyCode() == keyboardEvent.getKeyCode())
                     .findFirst().orElse(null);
             if(keyboardKey != null){
-                keyboardKey.execute();
+                if(pressed){
+                    keyboardKey.executePressed();
+                } else {
+                    keyboardKey.executeReleased();
+                }
             }
         }
         lastKeyboardEvent = keyboardEvent;
     }
 
     //Enum de las opciones de la key
-    public enum KeyOption{
+    private enum KeyOption{
         PRESSED,
-        RELEASED,
-        BOTH
+        RELEASED
     }
 
     private KeyListenerEvent.KeyOption keyOption;

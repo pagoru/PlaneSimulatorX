@@ -1,7 +1,6 @@
 package es.pagoru.planesimulatorx.input.keys;
 
 import es.pagoru.planesimulatorx.input.KeyI;
-import es.pagoru.planesimulatorx.input.KeyListenerEvent;
 import es.pagoru.planesimulatorx.windows.MainMenuWindow;
 
 import java.awt.event.KeyEvent;
@@ -16,15 +15,15 @@ public class KeyUP implements KeyI {
     }
 
     @Override
-    public void execute() {
+    public void executePressed() {
+
+    }
+
+    @Override
+    public void executeReleased() {
         MainMenuWindow mainMenuWindow = MainMenuWindow.INSTANCE;
         if(mainMenuWindow.isInsideMenu()){
             mainMenuWindow.moveMenu(true);
         }
-    }
-
-    @Override
-    public KeyListenerEvent.KeyOption getKeyOption() {
-        return KeyListenerEvent.KeyOption.RELEASED;
     }
 }

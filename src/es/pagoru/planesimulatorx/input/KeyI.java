@@ -6,8 +6,7 @@ package es.pagoru.planesimulatorx.input;
 public interface KeyI {
 
     int getKeyCode();
-    //TODO Separar el execute del release/press
-    void execute();
-    KeyListenerEvent.KeyOption getKeyOption();
+    void executePressed();
+    void executeReleased();
 
 }
