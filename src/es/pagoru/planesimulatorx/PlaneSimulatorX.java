@@ -8,9 +8,9 @@ import java.io.IOException;
 public class PlaneSimulatorX {
 
     public static Window window;
-
+    
     public static void main(String[] args) throws IOException {
-
+        
         window = new Window();
 
     }

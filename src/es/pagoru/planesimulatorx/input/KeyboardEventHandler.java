@@ -3,7 +3,7 @@ package es.pagoru.planesimulatorx.input;
 import es.pagoru.planesimulatorx.input.keys.KeyDown;
 import es.pagoru.planesimulatorx.input.keys.KeyEscape;
 import es.pagoru.planesimulatorx.input.keys.KeyUP;
-import es.pagoru.planesimulatorx.windows.MainMenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -42,10 +42,7 @@ public class KeyboardEventHandler {
 
             @Override
             public void executeReleased() {
-                MainMenuWindow mainMenuWindow = MainMenuWindow.INSTANCE;
-                if(mainMenuWindow.isInsideMenu()){
-                    mainMenuWindow.openSubMenu();
-                }
+                MenuWindows.getCurrentMenu().openCurrentSelection();
             }
 
         });

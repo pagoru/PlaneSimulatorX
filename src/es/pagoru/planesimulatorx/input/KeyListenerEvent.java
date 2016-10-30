@@ -1,7 +1,6 @@
 package es.pagoru.planesimulatorx.input;
 
-import es.pagoru.planesimulatorx.Window;
-import es.pagoru.planesimulatorx.windows.MainMenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,11 +12,13 @@ public class KeyListenerEvent implements KeyListener {
 
     private static KeyListenerEvent lastKeyboardEvent;
 
+    private static boolean firstKey = true;
     private static void onEvent(KeyListenerEvent keyboardEvent){
         boolean pressed = keyboardEvent.getKeyOption().equals(KeyOption.PRESSED);
-        if(Window.getInstance().isFirstLoad()){
+        if(firstKey){
             if(!pressed){
-                MainMenuWindow.INSTANCE.firstLoad();
+                MenuWindows.openMenu("MainMenu");
+                firstKey = false;
             }
             return;
         }

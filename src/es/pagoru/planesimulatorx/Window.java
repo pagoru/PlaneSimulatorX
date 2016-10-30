@@ -2,6 +2,7 @@ package es.pagoru.planesimulatorx;
 
 import es.pagoru.planesimulatorx.input.KeyListenerEvent;
 import es.pagoru.planesimulatorx.input.KeyboardEventHandler;
+import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,19 +16,22 @@ import java.util.stream.Collectors;
  * Created by pablo on 26/10/16.
  */
 public class Window {
-
+    
     public static Window getInstance(){
         return PlaneSimulatorX.window;
     }
 
-    public static String getWindowString(String path, String charset) throws IOException {
-        return Files.readAllLines(Paths.get("src/assets/" + path + ".txt"), Charset.forName(charset)).stream().collect(Collectors.joining());
+    public static String getWindowString(String path, String charset) {
+        try {
+            return Files.readAllLines(Paths.get("src/assets/menus/" + path + ".txt"), Charset.forName(charset)).stream().collect(Collectors.joining());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private JTextArea textArea;
     private JFrame frame;
-
-    private boolean firstLoad;
 
     public Window() throws IOException {
 
@@ -38,6 +42,8 @@ public class Window {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        MenuWindows.load();
 
         frame = new JFrame("Planes Simulator X");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,17 +79,8 @@ public class Window {
 
         frame.setVisible(true);
 
-        setFirstLoad(true);
         KeyboardEventHandler.load();
 
-    }
-
-    public void setFirstLoad(boolean firstLoad){
-        this.firstLoad = firstLoad;
-    }
-
-    public boolean isFirstLoad(){
-        return firstLoad;
     }
 
     public void loadWindow(String path, String charset) throws IOException {
@@ -92,11 +89,22 @@ public class Window {
 
     public void loadWindow(String text){
         textArea.setText(text);
-        setFirstLoad(false);
     }
-
+    
     public void close(){
-        frame.dispose();
+        MenuWindows.openMenu("GoodbyeWindow");
+
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    sleep(3000);
+                    frame.dispose();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private Font loadFont(String name){
