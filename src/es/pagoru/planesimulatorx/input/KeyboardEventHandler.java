@@ -50,13 +50,34 @@ public class KeyboardEventHandler {
         add(new KeyI() {
             @Override
             public int getKeyCode() {
-                return KeyEvent.VK_W;
+                return KeyEvent.VK_D;
             }
 
             @Override
             public void executePressed() {
-                ((CockpitMenuWindow)MenuWindows.getCurrentMenu()).x++;
-                MenuWindows.getCurrentMenu().draw();
+                CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)MenuWindows.getCurrentMenu());
+                cockpitMenuWindow.x++;
+                cockpitMenuWindow.moveControlsPosition(CockpitMenuWindow.ControlsPosition.RIGHT_45);
+                cockpitMenuWindow.draw();
+            }
+
+            @Override
+            public void executeReleased() {
+
+            }
+        });
+        add(new KeyI() {
+            @Override
+            public int getKeyCode() {
+                return KeyEvent.VK_A;
+            }
+
+            @Override
+            public void executePressed() {
+                CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)MenuWindows.getCurrentMenu());
+                cockpitMenuWindow.x--;
+                cockpitMenuWindow.moveControlsPosition(CockpitMenuWindow.ControlsPosition.LEFT_45);
+                cockpitMenuWindow.draw();
             }
 
             @Override
