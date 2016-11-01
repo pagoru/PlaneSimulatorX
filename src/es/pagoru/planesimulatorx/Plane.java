@@ -15,10 +15,11 @@ public class Plane {
     private boolean undercarriage;
 
     private boolean engine;
-    private int velocity;
     private int kerosene;
 
     private Vector3Di position;
+    
+    private int throttle;
     private float yaw;
     private float pitch;
 
@@ -48,8 +49,8 @@ public class Plane {
         return engine;
     }
 
-    public int getVelocity() {
-        return velocity;
+    public int getThrottle() {
+        return throttle;
     }
 
     public int getKerosene() {

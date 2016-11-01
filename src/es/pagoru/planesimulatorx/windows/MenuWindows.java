@@ -16,6 +16,7 @@ public class MenuWindows {
         menuWindowList.add(new MainMenuWindow());
         menuWindowList.add(new CreatePlaneMenuWindow());
         menuWindowList.add(new GoodbyeMenuWindow());
+        menuWindowList.add(new CockpitMenuWindow());
     }
 
     private static MenuWindow getMenuWindow(String name){
