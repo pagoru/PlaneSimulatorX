@@ -47,6 +47,7 @@ public class Vector3Di {
     public Vector3Di add(Vector3Di vector){
         this.x += vector.x;
         this.y += vector.y;
+        this.z += vector.z;
         return this;
     }
 
