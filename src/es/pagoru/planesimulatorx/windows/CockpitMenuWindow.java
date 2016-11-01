@@ -30,6 +30,11 @@ public class CockpitMenuWindow extends MenuWindow {
         
     }
     
+    private static final int LINE_SIZE = 240;
+
+    private static final int WIDTH = 60;
+    private static final int HEIGHT = 19;
+    
     public CockpitMenuWindow() {
         super("Cockpit");
     }
@@ -75,23 +80,18 @@ public class CockpitMenuWindow extends MenuWindow {
     private String[] getLandscape(String[] landscape, int x, int y){
         String[] image = new String[60 * 19];
 
-        final int lineSize = 240;
-        
-        final int width = 60;
-        final int height = 19;
-        
         int initX = x;
         int initY = y;
         
-        int finalX = width + x;
-        int finalY = height + y;
+        int finalX = WIDTH + x;
+        int finalY = HEIGHT + y;
         
-        int realWidth = (finalX - initX) - ((finalX > lineSize) ? (finalX - lineSize) : 0);
+        int realWidth = (finalX - initX) - ((finalX > LINE_SIZE) ? (finalX - LINE_SIZE) : 0);
         
         doThingsWithLandscape(landscape, image, initX, initY, finalX, finalY, realWidth, 0);
         
         int oldRealWidth = realWidth;
-        realWidth = width - realWidth;
+        realWidth = WIDTH - realWidth;
         
         if(realWidth > 0){
             initX = 0;
@@ -103,9 +103,6 @@ public class CockpitMenuWindow extends MenuWindow {
     }
     
     private String[] doThingsWithLandscape(String[] landscape, String[] image, int initX, int initY, int finalX, int finalY, int realWidth, int oldWidth){
-        final int lineSize = 240;
-
-        final int width = 60;
         
         int imageX = 0, imageY = 0;
         int landscapeX, landscapeY = 0;
@@ -113,12 +110,12 @@ public class CockpitMenuWindow extends MenuWindow {
         for (int lsXY = 0; lsXY < landscape.length; lsXY++) {
             String currentLandscape = landscape[lsXY];
 
-            landscapeX = lsXY % lineSize;
+            landscapeX = lsXY % LINE_SIZE;
 
             if(initX <= landscapeX && finalX > landscapeX
                     && initY < landscapeY && finalY >= landscapeY){
 
-                image[oldWidth + imageX + (imageY * width)] = currentLandscape;
+                image[oldWidth + imageX + (imageY * WIDTH)] = currentLandscape;
 
                 imageX++;
                 if(imageX % realWidth == 0){
@@ -134,17 +131,5 @@ public class CockpitMenuWindow extends MenuWindow {
         }
         return image;
     }
-    
-//    public static void main(String[] asd){
-//        String[] landscape = ;
-//        String[] land = 
-//
-//        for (int y = 0; y < 20; y++) {
-//            for (int x = 0; x < 60; x++) {
-//                System.out.print(land[x + (y * 60)]);
-//            }
-//            System.out.println("");
-//        }
-//    }
     
 }
