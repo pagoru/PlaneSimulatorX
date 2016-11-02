@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 public class CockpitMenuWindow extends MenuWindow {
     
     public enum ControlsPosition {
-        NORMAL(1),
+        RIGHT_90(1),
         RIGHT_45(2),
-        RIGHT_90(3),
+        NORMAL(3),
         LEFT_45(4),
         LEFT_90(5);
         
@@ -47,8 +47,30 @@ public class CockpitMenuWindow extends MenuWindow {
 
         controlsPosition = ControlsPosition.NORMAL;
     }
+
+    public ControlsPosition getControlsPosition() {
+        return controlsPosition;
+    }
+
+    private void setControlsPosition(ControlsPosition controlsPosition) {
+        this.controlsPosition = controlsPosition;
+    }
+
+    public void moveControlsTo(boolean right){
+        int id = getControlsPosition().getId();
+        if(right){
+            if(id > 1){
+                setControlsPosition(ControlsPosition.values()[id - 2]);
+            }
+            return;
+        }
+        if(id < 5){
+            setControlsPosition(ControlsPosition.values()[id]);
+        }
+        
+    }
     
-    public void moveControlsPosition(ControlsPosition controlsPosition){
+    private void moveControlsPosition(ControlsPosition controlsPosition){
         this.controlsPosition = controlsPosition;
     }
     

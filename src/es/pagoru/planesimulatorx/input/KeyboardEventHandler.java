@@ -57,7 +57,7 @@ public class KeyboardEventHandler {
             public void executePressed() {
                 CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)MenuWindows.getCurrentMenu());
                 cockpitMenuWindow.x++;
-                cockpitMenuWindow.moveControlsPosition(CockpitMenuWindow.ControlsPosition.RIGHT_45);
+                cockpitMenuWindow.moveControlsTo(true);
                 cockpitMenuWindow.draw();
             }
 
@@ -76,7 +76,7 @@ public class KeyboardEventHandler {
             public void executePressed() {
                 CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)MenuWindows.getCurrentMenu());
                 cockpitMenuWindow.x--;
-                cockpitMenuWindow.moveControlsPosition(CockpitMenuWindow.ControlsPosition.LEFT_45);
+                cockpitMenuWindow.moveControlsTo(false);
                 cockpitMenuWindow.draw();
             }
 
