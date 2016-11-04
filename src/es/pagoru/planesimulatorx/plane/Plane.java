@@ -1,4 +1,4 @@
-package es.pagoru.planesimulatorx;
+package es.pagoru.planesimulatorx.plane;
 
 import es.pagoru.planesimulatorx.utils.Vector3Di;
 
@@ -6,6 +6,25 @@ import es.pagoru.planesimulatorx.utils.Vector3Di;
  * Created by pablo on 25/10/16.
  */
 public class Plane {
+
+    public enum FlightControlPositions {
+        RIGHT_90(1),
+        RIGHT_45(2),
+        NORMAL(3),
+        LEFT_45(4),
+        LEFT_90(5);
+
+        int id;
+        FlightControlPositions(int id){
+            this.id = id;
+        }
+        public int getId(){
+            return id;
+        }
+        public String getFileName(){
+            return "cockpit_control_" + getId();
+        }
+    }
 
     private String plate;
 

@@ -1,6 +1,7 @@
 package es.pagoru.planesimulatorx.windows;
 
 import es.pagoru.planesimulatorx.Window;
+import es.pagoru.planesimulatorx.plane.PlaneThread;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

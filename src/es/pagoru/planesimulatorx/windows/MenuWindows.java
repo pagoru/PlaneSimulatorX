@@ -1,5 +1,7 @@
 package es.pagoru.planesimulatorx.windows;
 
+import es.pagoru.planesimulatorx.plane.PlaneThread;
+
 import java.util.ArrayList;
 import java.util.List;
 

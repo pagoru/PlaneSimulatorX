@@ -3,7 +3,9 @@ package es.pagoru.planesimulatorx.input;
 import es.pagoru.planesimulatorx.input.keys.KeyDown;
 import es.pagoru.planesimulatorx.input.keys.KeyEscape;
 import es.pagoru.planesimulatorx.input.keys.KeyUP;
+import es.pagoru.planesimulatorx.plane.PlaneThread;
 import es.pagoru.planesimulatorx.windows.CockpitMenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.awt.event.KeyEvent;
@@ -44,6 +46,10 @@ public class KeyboardEventHandler {
             @Override
             public void executeReleased() {
                 MenuWindows.getCurrentMenu().openCurrentSelection();
+                if(MenuWindows.getCurrentMenu().getName().equalsIgnoreCase("Cockpit")){
+                    Thread t = new Thread(new PlaneThread());
+                    t.start();
+                }
             }
 
         });
@@ -56,7 +62,7 @@ public class KeyboardEventHandler {
             @Override
             public void executePressed() {
                 CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)MenuWindows.getCurrentMenu());
-                cockpitMenuWindow.x++;
+//                cockpitMenuWindow.x++;
                 cockpitMenuWindow.moveControlsTo(true);
                 cockpitMenuWindow.draw();
             }
@@ -75,7 +81,7 @@ public class KeyboardEventHandler {
             @Override
             public void executePressed() {
                 CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)MenuWindows.getCurrentMenu());
-                cockpitMenuWindow.x--;
+//                cockpitMenuWindow.x--;
                 cockpitMenuWindow.moveControlsTo(false);
                 cockpitMenuWindow.draw();
             }
