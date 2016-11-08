@@ -6,11 +6,11 @@ import es.pagoru.planesimulatorx.windows.MenuWindows;
 /**
  * Created by pablo on 3/11/16.
  */
-public class PlaneThread implements Runnable {
+public class CockpitMenuWindowThread extends Thread {
 
     private CockpitMenuWindow cockpitMenuWindow;
 
-    public PlaneThread(){
+    public CockpitMenuWindowThread(){
         this.cockpitMenuWindow = (CockpitMenuWindow) MenuWindows.getCurrentMenu();
     }
 
@@ -19,19 +19,20 @@ public class PlaneThread implements Runnable {
 
         while(true){
             try {
-                int id = cockpitMenuWindow.getControlsPosition().getId();
+                Plane plane = cockpitMenuWindow.getPlane();
+                int id = plane.getFlightControlPositions().getId();
                 switch (id){
                     case 1:
-                        cockpitMenuWindow.x += 2;
+                        plane.addPitch(3);
                         break;
                     case 2:
-                        cockpitMenuWindow.x++;
+                        plane.addPitch(1);
                         break;
                     case 4:
-                        cockpitMenuWindow.x--;
+                        plane.addPitch(-1);
                         break;
                     case 5:
-                        cockpitMenuWindow.x -= 2;
+                        plane.addPitch(-3);
                         break;
                 }
                 cockpitMenuWindow.draw();
@@ -39,6 +40,9 @@ public class PlaneThread implements Runnable {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            if(!(MenuWindows.getCurrentMenu() instanceof  CockpitMenuWindow)){
+                break;
             }
         }
     }

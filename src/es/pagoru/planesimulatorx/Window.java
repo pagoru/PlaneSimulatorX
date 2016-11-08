@@ -2,7 +2,6 @@ package es.pagoru.planesimulatorx;
 
 import es.pagoru.planesimulatorx.input.KeyListenerEvent;
 import es.pagoru.planesimulatorx.input.KeyboardEventHandler;
-import es.pagoru.planesimulatorx.plane.PlaneThread;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import javax.swing.*;
