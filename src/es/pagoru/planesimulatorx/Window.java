@@ -16,14 +16,18 @@ import java.util.stream.Collectors;
  * Created by pablo on 26/10/16.
  */
 public class Window {
-    
+
+    public static final int WIDTH = 95;
+    public static final int HEIGHT = 24;
+
     public static Window getInstance(){
         return PlaneSimulatorX.window;
     }
 
     public static String getWindowString(String path, String charset) {
         try {
-            return Files.readAllLines(Paths.get("src/assets/menus/" + path + ".txt"), Charset.forName(charset)).stream().collect(Collectors.joining());
+            return Files.readAllLines(Paths.get("src/assets/menus/" + path + ".txt"),
+                    Charset.forName(charset)).stream().collect(Collectors.joining());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,8 +59,8 @@ public class Window {
         textArea = new JTextArea();
         loadWindow("WelcomeWindow", "UTF-8");
         textArea.setEditable(false);
-        textArea.setRows(24);
-        textArea.setColumns(95);
+        textArea.setRows(HEIGHT);
+        textArea.setColumns(WIDTH);
         textArea.setLineWrap(true);
         textArea.setBackground(new Color(0, 0, 0));
         textArea.setForeground(new Color(0, 228, 0));
@@ -88,6 +92,10 @@ public class Window {
     }
 
     public void loadWindow(String text){
+
+        if(text.length() >= (WIDTH * HEIGHT)){
+            text = text.substring(0, (WIDTH * HEIGHT));
+        }
         textArea.setText(text);
     }
     
