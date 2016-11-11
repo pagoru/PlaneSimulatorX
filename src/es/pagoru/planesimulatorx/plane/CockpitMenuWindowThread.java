@@ -45,11 +45,20 @@ public class CockpitMenuWindowThread extends Thread {
                         break;
                 }
                 int idThrottle = plane.getFlightControlThrottlePosition().ordinal();
+                switch (idThrottle){
+                    case 0:
+                        plane.addThrottle(idThrottle);
+                        break;
+                    default:
+                        plane.addThrottle(idThrottle);
+                        break;
+
+                }
                 plane.addThrottle(idThrottle);
 //                System.out.println(plane.getPitch());
                 //TODO Coords Y
 
-                System.out.println("throttle: " + plane.getThrottle() + " >> " + plane.getFlightControlThrottlePosition());
+//                System.out.println("throttle: " + plane.getThrottle() + " >> " + plane.getFlightControlThrottlePosition());
 
                 cockpitMenuWindow.draw();
                 Thread.sleep(100);

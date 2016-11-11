@@ -3,6 +3,7 @@ package es.pagoru.planesimulatorx.windows;
 import es.pagoru.planesimulatorx.Window;
 import es.pagoru.planesimulatorx.plane.CockpitMenuWindowThread;
 import es.pagoru.planesimulatorx.plane.Plane;
+import es.pagoru.planesimulatorx.utils.Vector3Di;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,23 @@ public class CockpitMenuWindow extends MenuWindow {
         //<-----------------------
 
         rawImage = addImageOnTop(rawImage, rawImage2, ":");
-        
+
+        Vector3Di pos = getPlane().getPosition();
+        setTextInPosition(rawImage, "X=" + pos.getX(), 0);
+        setTextInPosition(rawImage, "Y=" + pos.getY(), WIDTH);
+        setTextInPosition(rawImage, "Z=" + pos.getZ(), WIDTH * 2);
+
+        setTextInPosition(rawImage, getPlane().getThrottle() + "mph", WIDTH * 12 + 27);
+
+        String onEngines = "#";
+        for (int i = 0; i < getPlane().getEnginesOn(); i++) {
+            onEngines += "1";
+        }
+        for (int i = 0; i < 4 - getPlane().getEnginesOn(); i++) {
+            onEngines += "0";
+        }
+        setTextInPosition(rawImage, onEngines + "#", WIDTH * 18 + 27);
+
         //cockpit
         Pattern p = Pattern.compile("&");
         Matcher m = p.matcher(raw);
@@ -97,6 +114,14 @@ public class CockpitMenuWindow extends MenuWindow {
         
         raw = raw.replaceAll("\\[([A-z])\\]", "[*]");
         Window.getInstance().loadWindow(raw);
+    }
+
+    private String[] setTextInPosition(String[] raw, String text, int initialPosition){
+        String[] textS = text.split("");
+        for (int i = 0; i < textS.length; i++) {
+            raw[initialPosition + i] = textS[i];
+        }
+        return raw;
     }
     
     private String[] getLandscape(String[] landscape, int x, int y){

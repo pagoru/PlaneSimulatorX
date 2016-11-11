@@ -9,17 +9,19 @@ import java.util.Random;
  */
 public class Plane {
 
+    private static final int MAX_THROTTLE = 570;
+
     public enum FlightControlThrottlePosition {
         OFF,
         POWER_1,
         POWER_2,
-        POWER_3;
+        POWER_3
     }
 
     public enum FlightControlPositionsUpDown {
         UP,
         NORMAL,
-        DOWN;
+        DOWN
     }
 
     public enum FlightControlPositionsLeftRight {
@@ -52,6 +54,8 @@ public class Plane {
     private boolean undercarriage;
 
     private boolean engine;
+    private boolean engineTurningOn;
+    private int enginesOn;
     private int kerosene;
 
     private Vector3Di position;
@@ -75,6 +79,12 @@ public class Plane {
         this.undercarriage = true;
         position = new Vector3Di(0, 0, 0);
         throttle = 0;
+        enginesOn = 0;
+        engineTurningOn = false;
+    }
+
+    public int getEnginesOn() {
+        return enginesOn;
     }
 
     public String getPlate() {
@@ -144,15 +154,26 @@ public class Plane {
                 @Override
                 public void run() {
                     try{
-                        Thread.sleep(3000);
+                        engineTurningOn = true;
+                        Thread.sleep(1000);
+                        enginesOn = 1;
+                        Thread.sleep(1000);
+                        enginesOn = 2;
+                        Thread.sleep(1000);
+                        enginesOn = 3;
+                        Thread.sleep(1000);
+                        enginesOn = 4;
+                        engineTurningOn = false;
                     } catch(Exception e){}
-                    //TODO Mostrar tiempo en cockpit
                     setEngine(true);
                 }
             }.start();
             return;
         }
-        setEngine(false);
+        if(!engineTurningOn){
+            setEngine(false);
+            enginesOn = 0;
+        }
     }
 
     public void addYaw(float yaw){
@@ -191,9 +212,7 @@ public class Plane {
 
     public void addThrottle(int throttle){
         if(isEngine() && throttle != 0){
-            int maxThrottle = throttle * 100;
-
-            if(getThrottle() < maxThrottle){
+            if(getThrottle() < MAX_THROTTLE){
                 setThrottle(getThrottle() + throttle);
             }
             return;
