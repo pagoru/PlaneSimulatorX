@@ -2,10 +2,19 @@ package es.pagoru.planesimulatorx.plane;
 
 import es.pagoru.planesimulatorx.utils.Vector3Di;
 
+import java.util.Random;
+
 /**
  * Created by pablo on 25/10/16.
  */
 public class Plane {
+
+    public enum FlightControlThrottlePosition {
+        OFF,
+        POWER_1,
+        POWER_2,
+        POWER_3;
+    }
 
     public enum FlightControlPositionsUpDown {
         UP,
@@ -53,6 +62,7 @@ public class Plane {
 
     private FlightControlPositionsLeftRight flightControlPositionsLeftRight;
     private FlightControlPositionsUpDown flightControlPositionsUpDown;
+    private FlightControlThrottlePosition flightControlThrottlePosition;
 
     public Plane(String plate, String model, String brand){
         this.plate = plate;
@@ -60,9 +70,11 @@ public class Plane {
         this.brand = brand;
         flightControlPositionsLeftRight = FlightControlPositionsLeftRight.NORMAL;
         flightControlPositionsUpDown = FlightControlPositionsUpDown.NORMAL;
+        flightControlThrottlePosition = FlightControlThrottlePosition.OFF;
         this.engine = false;
         this.undercarriage = true;
         position = new Vector3Di(0, 0, 0);
+        throttle = 0;
     }
 
     public String getPlate() {
@@ -153,15 +165,65 @@ public class Plane {
         }
     }
 
+    private void setPitch(float pitch){
+        this.pitch = pitch;
+    }
+
     public void addPitch(float pitch){
         if(isEngine()){
-            this.pitch += pitch;
-            if(this.pitch < 0){
-                this.pitch += 360;
+            if(getPitch() < 45){
+                setPitch(getPitch() + pitch);
             }
-            this.pitch %= 360;
         }
     }
+
+    public void subtractPitch(float pitch){
+        if(isEngine()){
+            if(getPitch() > -45){
+                setPitch(getPitch() - pitch);
+            }
+        }
+    }
+
+    private void setThrottle(int throttle){
+        this.throttle = throttle;
+    }
+
+    public void addThrottle(int throttle){
+        if(isEngine() && throttle != 0){
+            int maxThrottle = throttle * 100;
+
+            if(getThrottle() < maxThrottle){
+                setThrottle(getThrottle() + throttle);
+            }
+            return;
+        }
+        if(getThrottle() > 0){
+            setThrottle(getThrottle() - 1);
+        }
+    }
+
+    public FlightControlThrottlePosition getFlightControlThrottlePosition() {
+        return flightControlThrottlePosition;
+    }
+
+    public void setFlightControlThrottlePosition(FlightControlThrottlePosition flightControlThrottlePosition) {
+        this.flightControlThrottlePosition = flightControlThrottlePosition;
+    }
+
+    public void moveFlightControlThrottlePosition(boolean up){
+        int id = getFlightControlThrottlePosition().ordinal();
+        if(up){
+            if(id > 0){
+                setFlightControlThrottlePosition(FlightControlThrottlePosition.values()[id - 1]);
+            }
+            return;
+        }
+        if(id < FlightControlThrottlePosition.values().length - 1){
+            setFlightControlThrottlePosition(FlightControlThrottlePosition.values()[id + 1]);
+        }
+    }
+
 
     public FlightControlPositionsUpDown getFlightControlPositionsUpDown() {
         return flightControlPositionsUpDown;
