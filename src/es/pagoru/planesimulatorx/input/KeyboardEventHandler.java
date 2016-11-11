@@ -138,6 +138,48 @@ public class KeyboardEventHandler {
 
             }
         });
+        add(new KeyI(){
+            @Override
+            public int getKeyCode() {
+                return KeyEvent.VK_W;
+            }
+
+            @Override
+            public void executePressed() {
+                MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+                if(menuWindow instanceof CockpitMenuWindow) {
+                    CockpitMenuWindow cockpitMenuWindow = (CockpitMenuWindow) menuWindow;
+                    cockpitMenuWindow.getPlane().moveFlightControlPositionsUpDown(false);
+                    cockpitMenuWindow.draw();
+                }
+            }
+
+            @Override
+            public void executeReleased() {
+
+            }
+        });
+        add(new KeyI(){
+            @Override
+            public int getKeyCode() {
+                return KeyEvent.VK_S;
+            }
+
+            @Override
+            public void executePressed() {
+                MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+                if(menuWindow instanceof CockpitMenuWindow) {
+                    CockpitMenuWindow cockpitMenuWindow = (CockpitMenuWindow) menuWindow;
+                    cockpitMenuWindow.getPlane().moveFlightControlPositionsUpDown(true);
+                    cockpitMenuWindow.draw();
+                }
+            }
+
+            @Override
+            public void executeReleased() {
+
+            }
+        });
 
     }
 

@@ -143,6 +143,16 @@ public class Plane {
         setEngine(false);
     }
 
+    public void addYaw(float yaw){
+        if(isEngine()){
+            this.yaw += yaw;
+            if(this.yaw < 0){
+                this.yaw += 360;
+            }
+            this.yaw %= 360;
+        }
+    }
+
     public void addPitch(float pitch){
         if(isEngine()){
             this.pitch += pitch;

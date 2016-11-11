@@ -59,7 +59,8 @@ public class CockpitMenuWindow extends MenuWindow {
     public void draw() {
         String raw = rawWindow;
 
-        int x = (int) (((float)LINE_SIZE / 360.0f) * getPlane().getPitch());
+        int x = (int) (((float)LINE_SIZE / 360.0f) * getPlane().getYaw());
+//        int y = (int) (((float)LINE_SIZE / 360.0f) * getPlane().getYaw());
 
         String[] landscape = getLandscape(Window.getWindowString("plane/landscape", "UTF-8").split(""), x, 60);
             
@@ -72,12 +73,13 @@ public class CockpitMenuWindow extends MenuWindow {
 
         //TODO UP & DOWN
         String[] rawImage2_B = new String[rawImage2.length];
+        int widthFlightControl = WIDTH * getPlane().getFlightControlPositionsUpDown().ordinal();
         for (int i = 0; i < rawImage2_B.length; i++) {
-            if(i < WIDTH*0){
+            if(i < widthFlightControl){
                 rawImage2_B[i] = ":";
                 continue;
             }
-            rawImage2_B[i] = rawImage2[i - WIDTH*0];
+            rawImage2_B[i] = rawImage2[i - widthFlightControl];
         }
         rawImage2 = rawImage2_B;
         //<-----------------------
