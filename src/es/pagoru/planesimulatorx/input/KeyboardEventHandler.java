@@ -5,6 +5,7 @@ import es.pagoru.planesimulatorx.input.keys.KeyEscape;
 import es.pagoru.planesimulatorx.input.keys.KeyUP;
 import es.pagoru.planesimulatorx.plane.CockpitMenuWindowThread;
 import es.pagoru.planesimulatorx.windows.CockpitMenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.awt.event.KeyEvent;
@@ -44,11 +45,12 @@ public class KeyboardEventHandler {
 
             @Override
             public void executeReleased() {
-                MenuWindows.getCurrentMenu().openCurrentSelection();
-                if(MenuWindows.getCurrentMenu().getName().equalsIgnoreCase("Cockpit")){
+                MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+                if(menuWindow.getName().equalsIgnoreCase("Cockpit")){
                     Thread t = new Thread(new CockpitMenuWindowThread());
                     t.start();
                 }
+                menuWindow.openCurrentSelection();
             }
 
         });
@@ -60,9 +62,12 @@ public class KeyboardEventHandler {
 
             @Override
             public void executePressed() {
-                CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)MenuWindows.getCurrentMenu());
-                cockpitMenuWindow.getPlane().moveFlightControlPosition(true);
-                cockpitMenuWindow.draw();
+                MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+                if(menuWindow instanceof CockpitMenuWindow){
+                    CockpitMenuWindow cockpitMenuWindow = (CockpitMenuWindow) menuWindow;
+                    cockpitMenuWindow.getPlane().moveFlightControlPositionLeftRight(true);
+                    cockpitMenuWindow.draw();
+                }
             }
 
             @Override
@@ -78,9 +83,54 @@ public class KeyboardEventHandler {
 
             @Override
             public void executePressed() {
-                CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)MenuWindows.getCurrentMenu());
-                cockpitMenuWindow.getPlane().moveFlightControlPosition(false);
-                cockpitMenuWindow.draw();
+                MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+                if(menuWindow instanceof CockpitMenuWindow) {
+                    CockpitMenuWindow cockpitMenuWindow = (CockpitMenuWindow) menuWindow;
+                    cockpitMenuWindow.getPlane().moveFlightControlPositionLeftRight(false);
+                    cockpitMenuWindow.draw();
+                }
+            }
+
+            @Override
+            public void executeReleased() {
+
+            }
+        });
+        add(new KeyI(){
+            @Override
+            public int getKeyCode() {
+                return KeyEvent.VK_Q;
+            }
+
+            @Override
+            public void executePressed() {
+                MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+                if(menuWindow instanceof CockpitMenuWindow) {
+                    CockpitMenuWindow cockpitMenuWindow = (CockpitMenuWindow) menuWindow;
+                    cockpitMenuWindow.getPlane().toggleEngine();
+                    cockpitMenuWindow.draw();
+                }
+            }
+
+            @Override
+            public void executeReleased() {
+
+            }
+        });
+        add(new KeyI(){
+            @Override
+            public int getKeyCode() {
+                return KeyEvent.VK_E;
+            }
+
+            @Override
+            public void executePressed() {
+                MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+                if(menuWindow instanceof CockpitMenuWindow) {
+                    CockpitMenuWindow cockpitMenuWindow = (CockpitMenuWindow) menuWindow;
+                    cockpitMenuWindow.getPlane().toggleUndercarriage();
+                    cockpitMenuWindow.draw();
+                }
             }
 
             @Override

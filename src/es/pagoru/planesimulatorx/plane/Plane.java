@@ -1,14 +1,19 @@
 package es.pagoru.planesimulatorx.plane;
 
 import es.pagoru.planesimulatorx.utils.Vector3Di;
-import es.pagoru.planesimulatorx.windows.CockpitMenuWindow;
 
 /**
  * Created by pablo on 25/10/16.
  */
 public class Plane {
 
-    public enum FlightControlPositions {
+    public enum FlightControlPositionsUpDown {
+        UP,
+        NORMAL,
+        DOWN;
+    }
+
+    public enum FlightControlPositionsLeftRight {
         RIGHT_90(1),
         RIGHT_45(2),
         NORMAL(3),
@@ -17,7 +22,7 @@ public class Plane {
 
         int id;
 
-        FlightControlPositions(int id){
+        FlightControlPositionsLeftRight(int id){
             this.id = id;
         }
 
@@ -46,13 +51,18 @@ public class Plane {
     private float yaw;
     private float pitch;
 
-    private FlightControlPositions flightControlPositions;
+    private FlightControlPositionsLeftRight flightControlPositionsLeftRight;
+    private FlightControlPositionsUpDown flightControlPositionsUpDown;
 
     public Plane(String plate, String model, String brand){
         this.plate = plate;
         this.model = model;
         this.brand = brand;
-        flightControlPositions = FlightControlPositions.NORMAL;
+        flightControlPositionsLeftRight = FlightControlPositionsLeftRight.NORMAL;
+        flightControlPositionsUpDown = FlightControlPositionsUpDown.NORMAL;
+        this.engine = false;
+        this.undercarriage = true;
+        position = new Vector3Di(0, 0, 0);
     }
 
     public String getPlate() {
@@ -99,44 +109,100 @@ public class Plane {
         this.undercarriage = undercarriage;
     }
 
-    public void setEngine(boolean engine) {
+    /*
+    Capturar error conforme no se puede subir porque esta tocando el suelo.
+     */
+    public boolean toggleUndercarriage(){
+        if(isUndercarriage()){
+            if(position.getY() == 0){
+                return false;
+            }
+        }
+        setUndercarriage(!isUndercarriage());
+        return true;
+    }
+
+    private void setEngine(boolean engine) {
         this.engine = engine;
     }
 
-    public void addPitch(float pitch){
-        this.pitch += pitch;
-        if(this.pitch < 0){
-            this.pitch += 360;
+    public void toggleEngine(){
+        if(!this.engine){
+            new Thread(){
+                @Override
+                public void run() {
+                    try{
+                        Thread.sleep(3000);
+                    } catch(Exception e){}
+                    //TODO Mostrar tiempo en cockpit
+                    setEngine(true);
+                }
+            }.start();
+            return;
         }
-        this.pitch %= 360;
+        setEngine(false);
     }
 
-    public FlightControlPositions getFlightControlPositions() {
-        return flightControlPositions;
+    public void addPitch(float pitch){
+        if(isEngine()){
+            this.pitch += pitch;
+            if(this.pitch < 0){
+                this.pitch += 360;
+            }
+            this.pitch %= 360;
+        }
     }
 
-    private void setFlightControlPositions(FlightControlPositions controlsPosition) {
-        this.flightControlPositions = controlsPosition;
+    public FlightControlPositionsUpDown getFlightControlPositionsUpDown() {
+        return flightControlPositionsUpDown;
     }
 
-    public void moveFlightControlPosition(boolean right){
-        int id = getFlightControlPositions().getId();
-        if(right){
-            if(id > 1){
-                setFlightControlPositions(FlightControlPositions.values()[id - 2]);
+    public void setFlightControlPositionsUpDown(FlightControlPositionsUpDown flightControlPositionsUpDown) {
+        this.flightControlPositionsUpDown = flightControlPositionsUpDown;
+    }
+
+    public void moveFlightControlPositionsUpDown(boolean up){
+        int id = getFlightControlPositionsUpDown().ordinal();
+        if(up){
+            if(id > 0){
+                setFlightControlPositionsUpDown(FlightControlPositionsUpDown.values()[id - 1]);
             }
             return;
         }
-        if(id < 5){
-            setFlightControlPositions(FlightControlPositions.values()[id]);
+        if(id < FlightControlPositionsUpDown.values().length - 1){
+            setFlightControlPositionsUpDown(FlightControlPositionsUpDown.values()[id + 1]);
         }
     }
 
-    public static void main(String[] args){
+/*    public static void main(String[] args){
         Plane plane = new Plane("asd", "adsa", "asd");
         plane.addPitch(45);
         plane.addPitch(-67);
 
-        System.out.println(plane.getPitch());
+        plane.moveFlightControlPositionsUpDown(true);
+        plane.moveFlightControlPositionsUpDown(true);
+
+        System.out.println(plane.getFlightControlPositionsUpDown());
+    }*/
+
+    public FlightControlPositionsLeftRight getFlightControlPositionsLeftRight() {
+        return flightControlPositionsLeftRight;
+    }
+
+    private void setFlightControlPositionsLeftRight(FlightControlPositionsLeftRight controlsPosition) {
+        this.flightControlPositionsLeftRight = controlsPosition;
+    }
+
+    public void moveFlightControlPositionLeftRight(boolean right){
+        int id = getFlightControlPositionsLeftRight().getId();
+        if(right){
+            if(id > 1){
+                setFlightControlPositionsLeftRight(FlightControlPositionsLeftRight.values()[id - 2]);
+            }
+            return;
+        }
+        if(id < FlightControlPositionsLeftRight.values().length){
+            setFlightControlPositionsLeftRight(FlightControlPositionsLeftRight.values()[id]);
+        }
     }
 }

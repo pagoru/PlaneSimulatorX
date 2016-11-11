@@ -67,8 +67,21 @@ public class CockpitMenuWindow extends MenuWindow {
         rawImage = addImageOnTop(landscape, rawImage, " ");
         
         //static
-        String[] rawImage2 = Window.getWindowString("plane/" + getPlane().getFlightControlPositions().getFileName(),
+        String[] rawImage2 = Window.getWindowString("plane/" + getPlane().getFlightControlPositionsLeftRight().getFileName(),
                 "UTF-8").split("");
+
+        //TODO UP & DOWN
+        String[] rawImage2_B = new String[rawImage2.length];
+        for (int i = 0; i < rawImage2_B.length; i++) {
+            if(i < WIDTH*0){
+                rawImage2_B[i] = ":";
+                continue;
+            }
+            rawImage2_B[i] = rawImage2[i - WIDTH*0];
+        }
+        rawImage2 = rawImage2_B;
+        //<-----------------------
+
         rawImage = addImageOnTop(rawImage, rawImage2, ":");
         
         //cockpit

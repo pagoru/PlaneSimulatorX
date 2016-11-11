@@ -20,7 +20,7 @@ public class CockpitMenuWindowThread extends Thread {
         while(true){
             try {
                 Plane plane = cockpitMenuWindow.getPlane();
-                int id = plane.getFlightControlPositions().getId();
+                int id = plane.getFlightControlPositionsLeftRight().getId();
                 switch (id){
                     case 1:
                         plane.addPitch(3);
