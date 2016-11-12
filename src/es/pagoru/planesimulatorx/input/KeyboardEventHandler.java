@@ -3,7 +3,7 @@ package es.pagoru.planesimulatorx.input;
 import es.pagoru.planesimulatorx.input.keys.KeyDown;
 import es.pagoru.planesimulatorx.input.keys.KeyEscape;
 import es.pagoru.planesimulatorx.input.keys.KeyUP;
-import es.pagoru.planesimulatorx.plane.CockpitMenuWindowThread;
+import es.pagoru.planesimulatorx.windows.cockpit.CockpitMenuWindowThread;
 import es.pagoru.planesimulatorx.windows.CockpitMenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;

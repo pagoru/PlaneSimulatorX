@@ -1,7 +1,8 @@
 package es.pagoru.planesimulatorx.windows;
 
-import es.pagoru.planesimulatorx.plane.CockpitMenuWindowThread;
-import es.pagoru.planesimulatorx.plane.Plane;
+import es.pagoru.planesimulatorx.windows.cockpit.CockpitMenuWindowThread;
+import es.pagoru.planesimulatorx.windows.cockpit.Plane;
+import es.pagoru.planesimulatorx.windows.create.CreatePlaneMenuWindowThread;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,21 @@ public class MenuWindows {
 
     public static void openMenu(String name){
         currentMenus.add(name);
+        Thread thread;
         switch(name){
             case "Cockpit":
                 CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)getCurrentMenu());
                 if(cockpitMenuWindow.getPlane() == null){
                     cockpitMenuWindow.addPlane(new Plane("asd", "asd", "asd"));
                 }
-                Thread thread = new CockpitMenuWindowThread();
+                thread = new CockpitMenuWindowThread();
                 cockpitMenuWindow.setCockpitMenuWindowThread(thread);
+                thread.start();
+                break;
+            case "CreatePlane":
+                CreatePlaneMenuWindow createPlaneMenuWindow = ((CreatePlaneMenuWindow)getCurrentMenu());
+                thread = new CreatePlaneMenuWindowThread();
+                createPlaneMenuWindow.setCreatePlaneMenuWindowThread(thread);
                 thread.start();
                 break;
         }

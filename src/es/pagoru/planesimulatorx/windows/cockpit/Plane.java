@@ -1,4 +1,4 @@
-package es.pagoru.planesimulatorx.plane;
+package es.pagoru.planesimulatorx.windows.cockpit;
 
 import es.pagoru.planesimulatorx.utils.Vector3Di;
 
@@ -276,14 +276,14 @@ public class Plane {
     }
 
 /*    public static void main(String[] args){
-        Plane plane = new Plane("asd", "adsa", "asd");
-        plane.addPitch(45);
-        plane.addPitch(-67);
+        Plane cockpit = new Plane("asd", "adsa", "asd");
+        cockpit.addPitch(45);
+        cockpit.addPitch(-67);
 
-        plane.moveFlightControlPositionsUpDown(true);
-        plane.moveFlightControlPositionsUpDown(true);
+        cockpit.moveFlightControlPositionsUpDown(true);
+        cockpit.moveFlightControlPositionsUpDown(true);
 
-        System.out.println(plane.getFlightControlPositionsUpDown());
+        System.out.println(cockpit.getFlightControlPositionsUpDown());
     }*/
 
     public FlightControlPositionsLeftRight getFlightControlPositionsLeftRight() {

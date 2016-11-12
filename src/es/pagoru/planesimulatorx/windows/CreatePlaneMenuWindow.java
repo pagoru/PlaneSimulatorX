@@ -5,10 +5,12 @@ package es.pagoru.planesimulatorx.windows;
  */
 public class CreatePlaneMenuWindow extends MenuWindow {
 
+    private Thread createPlaneMenuWindowThread;
+    
     public CreatePlaneMenuWindow() {
         super("CreatePlane");
     }
-
+    
     @Override
     public void openCurrentSelection() {
         switch (getCurrentSelection()) {
@@ -16,6 +18,24 @@ public class CreatePlaneMenuWindow extends MenuWindow {
                 MenuWindows.closeLastMenu();
                 break;
         }
+    }
+
+    @Override
+    public void draw() {
+        //rawWindow = rawWindow.replaceAll("@(a)\\{(.*?)\\}", "______________________________________");
+        super.draw();
+    }
+    
+    public void setCreatePlaneMenuWindowThread(Thread thread){
+        this.createPlaneMenuWindowThread = thread;
+    }
+    
+    public String getRawWindow(){
+        return this.rawWindow;
+    }
+    
+    public void setRawWindow(String rawWindow){
+        this.rawWindow = rawWindow;
     }
     
 }

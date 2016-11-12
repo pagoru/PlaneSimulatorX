@@ -1,8 +1,8 @@
 package es.pagoru.planesimulatorx.windows;
 
 import es.pagoru.planesimulatorx.Window;
-import es.pagoru.planesimulatorx.plane.CockpitMenuWindowThread;
-import es.pagoru.planesimulatorx.plane.Plane;
+import es.pagoru.planesimulatorx.windows.cockpit.CockpitMenuWindowThread;
+import es.pagoru.planesimulatorx.windows.cockpit.Plane;
 import es.pagoru.planesimulatorx.utils.Vector3Di;
 
 import java.util.ArrayList;
@@ -65,13 +65,13 @@ public class CockpitMenuWindow extends MenuWindow {
         y = (y < 0) ? 0 : y;
         y = (y > 66) ? 66 : y;
 
-        String[] landscape = getLandscape(Window.getWindowString("plane/landscape", "UTF-8").split(""), x, y);
+        String[] landscape = getLandscape(Window.getWindowString("cockpit/landscape", "UTF-8").split(""), x, y);
             
-        String[] rawImage = Window.getWindowString("plane/cockpit", "UTF-8").split("");
+        String[] rawImage = Window.getWindowString("cockpit/cockpit", "UTF-8").split("");
         rawImage = addImageOnTop(landscape, rawImage, " ");
         
         //static
-        String[] rawImage2 = Window.getWindowString("plane/" + getPlane().getFlightControlPositionsLeftRight().getFileName(),
+        String[] rawImage2 = Window.getWindowString("cockpit/" + getPlane().getFlightControlPositionsLeftRight().getFileName(),
                 "UTF-8").split("");
 
         //TODO UP & DOWN
@@ -89,7 +89,7 @@ public class CockpitMenuWindow extends MenuWindow {
 
         rawImage = addImageOnTop(rawImage, rawImage2, ":");
 
-        String[] rawImage3 = Window.getWindowString("plane/" + getPlane().getFlightControlThrottlePosition().getFileName(), "UTF-8").split("");
+        String[] rawImage3 = Window.getWindowString("cockpit/" + getPlane().getFlightControlThrottlePosition().getFileName(), "UTF-8").split("");
         rawImage = addImageOnTop(rawImage, rawImage3, ":");
 
         Vector3Di pos = getPlane().getPosition();

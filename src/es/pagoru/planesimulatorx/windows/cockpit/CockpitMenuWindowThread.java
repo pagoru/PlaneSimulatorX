@@ -1,4 +1,4 @@
-package es.pagoru.planesimulatorx.plane;
+package es.pagoru.planesimulatorx.windows.cockpit;
 
 import es.pagoru.planesimulatorx.utils.Vector3Di;
 import es.pagoru.planesimulatorx.windows.CockpitMenuWindow;
@@ -47,10 +47,10 @@ public class CockpitMenuWindowThread extends Thread {
                 }
                 int idThrottle = plane.getFlightControlThrottlePosition().ordinal();
                 plane.addThrottle(idThrottle);
-//                System.out.println(plane.getPitch());
+//                System.out.println(cockpit.getPitch());
                 //TODO Coords Y
 
-//                System.out.println("throttle: " + plane.getThrottle() + " >> " + plane.getFlightControlThrottlePosition());
+//                System.out.println("throttle: " + cockpit.getThrottle() + " >> " + cockpit.getFlightControlThrottlePosition());
 
                 Vector3Di vector = new Vector3Di(0, 0, 0);
                 
@@ -111,7 +111,7 @@ public class CockpitMenuWindowThread extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(!(MenuWindows.getCurrentMenu() instanceof  CockpitMenuWindow)){
+            if(!(MenuWindows.getCurrentMenu() instanceof CockpitMenuWindow)){
                 break;
             }
         }
