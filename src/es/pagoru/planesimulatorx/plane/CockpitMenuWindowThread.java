@@ -1,5 +1,6 @@
 package es.pagoru.planesimulatorx.plane;
 
+import es.pagoru.planesimulatorx.utils.Vector3Di;
 import es.pagoru.planesimulatorx.windows.CockpitMenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
 
@@ -45,21 +46,66 @@ public class CockpitMenuWindowThread extends Thread {
                         break;
                 }
                 int idThrottle = plane.getFlightControlThrottlePosition().ordinal();
-                switch (idThrottle){
-                    case 0:
-                        plane.addThrottle(idThrottle);
-                        break;
-                    default:
-                        plane.addThrottle(idThrottle);
-                        break;
-
-                }
                 plane.addThrottle(idThrottle);
 //                System.out.println(plane.getPitch());
                 //TODO Coords Y
 
 //                System.out.println("throttle: " + plane.getThrottle() + " >> " + plane.getFlightControlThrottlePosition());
 
+                Vector3Di vector = new Vector3Di(0, 0, 0);
+                
+                int throttle = plane.getThrottle();
+                float pitch = plane.getPitch();
+                double yaw = Math.toRadians(plane.getYaw());
+                
+                double vX = Math.sin(yaw);
+                double vZ = Math.cos(yaw);
+                
+                if(throttle > 0){//THROTTLE = 1 -> 570
+                    
+                    vector.addX((int)((throttle/50) * vX));
+                    vector.addZ((int)((throttle/50) * vZ));
+                    
+                    if(throttle >= 400) {//THROTTLE = 400 -> 570)
+                        
+                        if(pitch > 5){
+                            vector.substractX((int)((throttle/100) * vX));
+                            vector.substractZ((int)((throttle/100) * vZ));
+                            
+                            vector.addY(throttle/(200 - (int)pitch));
+                        } else if(pitch < -5){
+                            vector.substractX((int)((throttle/25) * vX));
+                            vector.substractZ((int)((throttle/25) * vZ));
+                            vector.substractY(throttle/(100 - (int)pitch));
+                        }
+                        
+                    } else {//THROTTLE = 1 -> 399
+                        if(throttle < 80){
+                            throttle = 80;
+                        }
+                        vector.substractY(throttle/(80 - (int)pitch));
+                        
+                    }
+                    
+                } else { //THROTTLE = 0
+                    
+                    if(plane.getPosition().getY() > 0){
+                        vector.addX((int)(2 * vX));
+                        vector.addZ((int)(2 * vZ));
+                        vector.substractY(1);
+                    }
+                    
+                }
+
+//                vector.addX((tX);
+//                vector.addZ(tZ);
+                
+                plane.getPosition().add(vector);
+                
+                if(plane.getPosition().getY() < 0){
+                    plane.getPosition().setY(0);
+                }
+                
                 cockpitMenuWindow.draw();
                 Thread.sleep(100);
             } catch (InterruptedException e) {

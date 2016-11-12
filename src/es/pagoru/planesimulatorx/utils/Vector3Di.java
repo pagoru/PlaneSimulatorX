@@ -15,6 +15,18 @@ public class Vector3Di {
         this.z = z;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setZ(int z) {
+        this.z = z;
+    }
+
     /**
      * Retorna X
      * @return
@@ -39,6 +51,18 @@ public class Vector3Di {
         return z;
     }
 
+    public void addX(int x){
+        this.x += x;
+    }
+
+    public void addY(int y){
+        this.y += y;
+    }
+
+    public void addZ(int z){
+        this.z += z;
+    }
+    
     /**
      * Suma el vector especificat al actual
      * @param vector
@@ -50,7 +74,19 @@ public class Vector3Di {
         this.z += vector.z;
         return this;
     }
+    
+    public void substractX(int x){
+        this.x -= x;
+    }
 
+    public void substractY(int y){
+        this.y -= y;
+    }
+
+    public void substractZ(int z){
+        this.z -= z;
+    }
+    
     /**
      * Resta el vector especificat al actual
      * @param vector3Di

@@ -61,9 +61,11 @@ public class CockpitMenuWindow extends MenuWindow {
         String raw = rawWindow;
 
         int x = (int) (((float)LINE_SIZE / 360.0f) * getPlane().getYaw());
-//        int y = (int) (((float)LINE_SIZE / 360.0f) * getPlane().getYaw());
+        int y = 66 - (getPlane().getPosition().getY()/50);
+        y = (y < 0) ? 0 : y;
+        y = (y > 66) ? 66 : y;
 
-        String[] landscape = getLandscape(Window.getWindowString("plane/landscape", "UTF-8").split(""), x, 60);
+        String[] landscape = getLandscape(Window.getWindowString("plane/landscape", "UTF-8").split(""), x, y);
             
         String[] rawImage = Window.getWindowString("plane/cockpit", "UTF-8").split("");
         rawImage = addImageOnTop(landscape, rawImage, " ");
@@ -87,21 +89,29 @@ public class CockpitMenuWindow extends MenuWindow {
 
         rawImage = addImageOnTop(rawImage, rawImage2, ":");
 
+        String[] rawImage3 = Window.getWindowString("plane/" + getPlane().getFlightControlThrottlePosition().getFileName(), "UTF-8").split("");
+        rawImage = addImageOnTop(rawImage, rawImage3, ":");
+
         Vector3Di pos = getPlane().getPosition();
         setTextInPosition(rawImage, "X=" + pos.getX(), 0);
         setTextInPosition(rawImage, "Y=" + pos.getY(), WIDTH);
         setTextInPosition(rawImage, "Z=" + pos.getZ(), WIDTH * 2);
 
-        setTextInPosition(rawImage, getPlane().getThrottle() + "mph", WIDTH * 12 + 27);
+        setTextInPosition(rawImage, ((int)getPlane().getPitch()) + "ºP", WIDTH * 11 + 20);
+        setTextInPosition(rawImage, ((int)getPlane().getYaw()) + "ºY", WIDTH * 11 + 36);
 
-        String onEngines = "#";
+        setTextInPosition(rawImage, (getPlane().isUndercarriage() ? "DO" : "UP"), WIDTH * 13 + 33);
+
+        setTextInPosition(rawImage, getPlane().getThrottle() + "mph", WIDTH * 11 + 27);
+
+        String onEngines = "";
         for (int i = 0; i < getPlane().getEnginesOn(); i++) {
             onEngines += "1";
         }
         for (int i = 0; i < 4 - getPlane().getEnginesOn(); i++) {
             onEngines += "0";
         }
-        setTextInPosition(rawImage, onEngines + "#", WIDTH * 18 + 27);
+        setTextInPosition(rawImage, onEngines, WIDTH * 18 + 28);
 
         //cockpit
         Pattern p = Pattern.compile("&");

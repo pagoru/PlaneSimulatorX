@@ -2,8 +2,6 @@ package es.pagoru.planesimulatorx.plane;
 
 import es.pagoru.planesimulatorx.utils.Vector3Di;
 
-import java.util.Random;
-
 /**
  * Created by pablo on 25/10/16.
  */
@@ -12,10 +10,14 @@ public class Plane {
     private static final int MAX_THROTTLE = 570;
 
     public enum FlightControlThrottlePosition {
+        REVERSE_1,
         OFF,
         POWER_1,
-        POWER_2,
-        POWER_3
+        POWER_2;
+        
+        public String getFileName() {
+            return "cockpit_throttle_" + ordinal();
+        }
     }
 
     public enum FlightControlPositionsUpDown {
@@ -149,41 +151,39 @@ public class Plane {
     }
 
     public void toggleEngine(){
-        if(!this.engine){
-            new Thread(){
-                @Override
-                public void run() {
-                    try{
-                        engineTurningOn = true;
-                        Thread.sleep(1000);
-                        enginesOn = 1;
-                        Thread.sleep(1000);
-                        enginesOn = 2;
-                        Thread.sleep(1000);
-                        enginesOn = 3;
-                        Thread.sleep(1000);
-                        enginesOn = 4;
-                        engineTurningOn = false;
-                    } catch(Exception e){}
-                    setEngine(true);
-                }
-            }.start();
-            return;
-        }
         if(!engineTurningOn){
+            if(!this.engine){
+                engineTurningOn = true;
+                new Thread(){
+                    @Override
+                    public void run() {
+                        try{
+                            Thread.sleep(1000);
+                            enginesOn = 1;
+                            Thread.sleep(1000);
+                            enginesOn = 2;
+                            Thread.sleep(1000);
+                            enginesOn = 3;
+                            Thread.sleep(1000);
+                            enginesOn = 4;
+                            engineTurningOn = false;
+                        } catch(Exception e){}
+                        setEngine(true);
+                    }
+                }.start();
+                return;
+            }
             setEngine(false);
             enginesOn = 0;
         }
     }
 
     public void addYaw(float yaw){
-        if(isEngine()){
-            this.yaw += yaw;
-            if(this.yaw < 0){
-                this.yaw += 360;
-            }
-            this.yaw %= 360;
+        this.yaw += yaw;
+        if(this.yaw < 0){
+            this.yaw += 360;
         }
+        this.yaw %= 360;
     }
 
     private void setPitch(float pitch){
@@ -191,15 +191,13 @@ public class Plane {
     }
 
     public void addPitch(float pitch){
-        if(isEngine()){
-            if(getPitch() < 45){
-                setPitch(getPitch() + pitch);
-            }
+        if(getPitch() < 45){
+            setPitch(getPitch() + pitch);
         }
     }
 
     public void subtractPitch(float pitch){
-        if(isEngine()){
+        if(getPosition().getY() > 0 || getPitch() > 0){
             if(getPitch() > -45){
                 setPitch(getPitch() - pitch);
             }
@@ -211,14 +209,26 @@ public class Plane {
     }
 
     public void addThrottle(int throttle){
-        if(isEngine() && throttle != 0){
-            if(getThrottle() < MAX_THROTTLE){
-                setThrottle(getThrottle() + throttle);
+        if(isEngine()){
+            if(throttle > 1){
+                if(getThrottle() < MAX_THROTTLE){
+                    setThrottle(getThrottle() + (throttle - 1));
+                }
+            } else if(throttle < 1){
+                if(getThrottle() > 1){
+                    setThrottle(getThrottle() - 3);
+                }
+                if(getThrottle() > -5 && getThrottle() < 5){
+                    setThrottle(0);
+                }
             }
             return;
         }
         if(getThrottle() > 0){
             setThrottle(getThrottle() - 1);
+        }
+        if(getThrottle() > -5 && getThrottle() < 5){
+            setThrottle(0);
         }
     }
 
