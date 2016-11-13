@@ -22,6 +22,7 @@ public class MenuWindows {
         menuWindowList.add(new GoodbyeMenuWindow());
         menuWindowList.add(new CockpitMenuWindow());
         menuWindowList.add(new InfoMenuWindow());
+        menuWindowList.add(new MenuWindow("Maintenance"));
 
         CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)getMenuWindow("Cockpit"));
         cockpitMenuWindow.addPlane(
