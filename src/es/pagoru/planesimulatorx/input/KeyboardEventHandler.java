@@ -29,7 +29,7 @@ public class KeyboardEventHandler {
         add(new KeyA());
         add(new KeyQ());
         add(new KeyE());
-        add(new KeyE());
+        add(new KeyW());
         add(new KeyS());
         add(new KeyR());
         add(new KeyF());
