@@ -2,6 +2,8 @@ package es.pagoru.planesimulatorx.windows;
 
 import es.pagoru.planesimulatorx.Window;
 import es.pagoru.planesimulatorx.input.KeyListenerEvent;
+import es.pagoru.planesimulatorx.utils.Vector3Di;
+import es.pagoru.planesimulatorx.windows.cockpit.Plane;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
@@ -58,7 +60,23 @@ public class CreatePlaneMenuWindow extends MenuWindow {
     public void openCurrentSelection() {
         switch (getCurrentSelection()) {
             case "[a]":
-                new Plane();
+                ((CockpitMenuWindow)MenuWindows.getMenuWindow("Cockpit")).addPlane(
+                        new Plane(
+                                optionsText.get("[d]").replaceAll("_", ""), 
+                                optionsText.get("[e]").replaceAll("_", ""), 
+                                optionsText.get("[f]").replaceAll("_", ""), 
+                                optionsText.get("[g]").replaceAll("_", ""), 
+                                Integer.parseInt(optionsText.get("[h]").replaceAll("_", "")), 
+                                Integer.parseInt(optionsText.get("[i]").replaceAll("_", "")), 
+                                new Vector3Di(
+                                        Integer.parseInt(optionsText.get("[j]").replaceAll("_", "")), 
+                                        Integer.parseInt(optionsText.get("[k]").replaceAll("_", "")), 
+                                        Integer.parseInt(optionsText.get("[l]").replaceAll("_", ""))
+                                )
+                        )
+                );
+                        //CockpitMenuWindow
+//                new Plane();
                 draw();
                 break;
             case "[b]":

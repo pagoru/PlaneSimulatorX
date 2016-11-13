@@ -222,6 +222,27 @@ public class KeyboardEventHandler {
 
             }
         });
+        add(new KeyI(){
+            @Override
+            public int getKeyCode() {
+                return KeyEvent.VK_B;
+            }
+
+            @Override
+            public void executePressed() {
+                MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+                if(menuWindow instanceof CockpitMenuWindow) {
+                    CockpitMenuWindow cockpitMenuWindow = (CockpitMenuWindow) menuWindow;
+                    cockpitMenuWindow.getPlane().toggleBreaks();
+                    cockpitMenuWindow.draw();
+                }
+            }
+
+            @Override
+            public void executeReleased() {
+
+            }
+        });
 
     }
 

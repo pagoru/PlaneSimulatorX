@@ -100,16 +100,18 @@ public class CockpitMenuWindow extends MenuWindow {
         setTextInPosition(rawImage, ((int)getPlane().getPitch()) + "ºP", WIDTH * 11 + 20);
         setTextInPosition(rawImage, ((int)getPlane().getYaw()) + "ºY", WIDTH * 11 + 36);
 
-        setTextInPosition(rawImage, (getPlane().isUndercarriage() ? "DO" : "UP"), WIDTH * 13 + 33);
+        setTextInPosition(rawImage, (getPlane().isUndercarriage() ? "╒╕" : "╘╛"), WIDTH * (getPlane().isUndercarriage() ? 13 : 14) + 33);
 
+        setTextInPosition(rawImage, (getPlane().isBreaks() ? "╒╕" : "╘╛"), WIDTH * (getPlane().isBreaks() ? 13 : 14) + 25);
+        
         setTextInPosition(rawImage, getPlane().getThrottle() + "mph", WIDTH * 11 + 27);
 
         String onEngines = "";
         for (int i = 0; i < getPlane().getEnginesOn(); i++) {
-            onEngines += "1";
+            onEngines += "╜";
         }
         for (int i = 0; i < 4 - getPlane().getEnginesOn(); i++) {
-            onEngines += "0";
+            onEngines += "╖";
         }
         setTextInPosition(rawImage, onEngines, WIDTH * 18 + 28);
 

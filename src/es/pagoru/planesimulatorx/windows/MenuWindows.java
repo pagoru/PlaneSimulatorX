@@ -1,5 +1,6 @@
 package es.pagoru.planesimulatorx.windows;
 
+import es.pagoru.planesimulatorx.utils.Vector3Di;
 import es.pagoru.planesimulatorx.windows.cockpit.CockpitMenuWindowThread;
 import es.pagoru.planesimulatorx.windows.cockpit.Plane;
 import es.pagoru.planesimulatorx.windows.create.CreatePlaneMenuWindowThread;
@@ -23,7 +24,7 @@ public class MenuWindows {
         menuWindowList.add(new CockpitMenuWindow());
     }
 
-    private static MenuWindow getMenuWindow(String name){
+    public static MenuWindow getMenuWindow(String name){
         return menuWindowList.stream().filter(m -> m.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 
@@ -34,7 +35,17 @@ public class MenuWindows {
             case "Cockpit":
                 CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)getCurrentMenu());
                 if(cockpitMenuWindow.getPlane() == null){
-                    cockpitMenuWindow.addPlane(new Plane("asd", "asd", "asd"));
+                    cockpitMenuWindow.addPlane(
+                            new Plane(
+                                    "A300",
+                                    "AIRBUS",
+                                    "AA3HKK",
+                                    "AMERICAN AIRLINES",
+                                    97,
+                                    8000,
+                                    new Vector3Di(0, 0, 0)
+                            )
+                    );
                 }
                 thread = new CockpitMenuWindowThread();
                 cockpitMenuWindow.setCockpitMenuWindowThread(thread);

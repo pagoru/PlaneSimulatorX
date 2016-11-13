@@ -52,6 +52,8 @@ public class Plane {
 
     private String brand;
     private String model;
+    private String owner;
+    private int capacity; 
 
     private boolean undercarriage;
 
@@ -59,6 +61,8 @@ public class Plane {
     private boolean engineTurningOn;
     private int enginesOn;
     private int kerosene;
+    
+    private boolean breaks;
 
     private Vector3Di position;
     
@@ -74,15 +78,37 @@ public class Plane {
         this.plate = plate;
         this.model = model;
         this.brand = brand;
-        flightControlPositionsLeftRight = FlightControlPositionsLeftRight.NORMAL;
-        flightControlPositionsUpDown = FlightControlPositionsUpDown.NORMAL;
-        flightControlThrottlePosition = FlightControlThrottlePosition.OFF;
         this.engine = false;
         this.undercarriage = true;
-        position = new Vector3Di(0, 0, 0);
-        throttle = 0;
-        enginesOn = 0;
-        engineTurningOn = false;
+        this.position = new Vector3Di(0, 0, 0);
+        this.throttle = 0;
+        this.enginesOn = 0;
+        this.engineTurningOn = false;
+        breaks = true;
+
+        this.flightControlPositionsLeftRight = FlightControlPositionsLeftRight.NORMAL;
+        this.flightControlPositionsUpDown = FlightControlPositionsUpDown.NORMAL;
+        this.flightControlThrottlePosition = FlightControlThrottlePosition.OFF;
+    }
+    
+    public Plane(String plate, String model, String brand, String owner, int capacity, int kerosene, Vector3Di position){
+        this(plate, model, brand);
+        this.owner = owner;
+        this.capacity = capacity;
+        this.kerosene = kerosene;
+        this.position = position;
+    }
+
+    public boolean isBreaks() {
+        return breaks;
+    }
+
+    public void toggleBreaks(){
+        setBreaks(!isBreaks());
+    }
+    
+    private void setBreaks(boolean breaks) {
+        this.breaks = breaks;
     }
 
     public int getEnginesOn() {
@@ -179,6 +205,9 @@ public class Plane {
     }
 
     public void addYaw(float yaw){
+        if (isBreaks()) {
+            return;
+        }
         this.yaw += yaw;
         if(this.yaw < 0){
             this.yaw += 360;
@@ -187,6 +216,9 @@ public class Plane {
     }
 
     private void setPitch(float pitch){
+        if (isBreaks()) {
+            return;
+        }
         this.pitch = pitch;
     }
 
