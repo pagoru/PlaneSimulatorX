@@ -120,7 +120,7 @@ public class Plane {
     }
 
     public String getPlate() {
-        return plate;
+        return plate.substring(0, plate.length() > 6 ? 6 : plate.length());
     }
 
     public String getBrand() {

@@ -1,6 +1,7 @@
 package es.pagoru.planesimulatorx.windows;
 
 import es.pagoru.planesimulatorx.Window;
+import es.pagoru.planesimulatorx.utils.StringUtils;
 import es.pagoru.planesimulatorx.windows.cockpit.CockpitMenuWindowThread;
 import es.pagoru.planesimulatorx.windows.cockpit.Plane;
 import es.pagoru.planesimulatorx.utils.Vector3Di;
@@ -35,6 +36,24 @@ public class CockpitMenuWindow extends MenuWindow {
         return (CockpitMenuWindowThread) cockpitMenuWindowThread;
     }
 
+    @Override
+    public void openCurrentSelection() {
+        switch (getCurrentSelection()) {
+            case "[a]":
+                MenuWindows.closeLastMenu();
+                break;
+            case "[b]":
+                togglePlane(false);
+                break;
+            case "[c]":
+                togglePlane(true);
+                break;
+        }
+    }
+    public List<Plane> getPlanes(){
+        return planes;
+    }
+    
     public void setCockpitMenuWindowThread(Thread cockpitMenuWindowThread) {
         this.cockpitMenuWindowThread = cockpitMenuWindowThread;
     }
@@ -151,21 +170,16 @@ public class CockpitMenuWindow extends MenuWindow {
             raw = raw.replaceFirst("@", planeInfo.substring(i, i + 1));
         }
         
-        raw = raw.replaceAll("\\[([A-z])\\]", "[*]").replaceAll("@", " ");
+        raw = raw
+                .replace(selections.get(currentSelection), "[*]")
+                .replaceAll("\\[([a-z])\\]", "[ ]")
+                .replaceAll("@", " ");
         Window.getInstance().loadWindow(raw);
     }
 
     private String getCenterText(String text){
         int c = (93 - text.length())/2;
-        return getAmountOfString(" ", c) + text + getAmountOfString(" ", (c%2 == 0? c : c +1));
-    }
-
-    private String getAmountOfString(String text, int quantity){
-        String nText = "";
-        for (int i = 0; i < quantity; i++){
-            nText += text;
-        }
-        return nText;
+        return StringUtils.getAmountOfString(" ", c) + text + StringUtils.getAmountOfString(" ", (c%2 == 0? c : c +1));
     }
 
     private String[] setTextInPosition(String[] raw, String text, int initialPosition){

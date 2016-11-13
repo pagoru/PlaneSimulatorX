@@ -1,8 +1,6 @@
 package es.pagoru.planesimulatorx.input.keys;
 
 import es.pagoru.planesimulatorx.input.KeyInterface;
-import es.pagoru.planesimulatorx.windows.CockpitMenuWindow;
-import es.pagoru.planesimulatorx.windows.MenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.awt.event.KeyEvent;
@@ -18,16 +16,10 @@ public class KeyRight implements KeyInterface {
 
     @Override
     public void executePressed() {
-        MenuWindow menuWindow = MenuWindows.getCurrentMenu();
-        if(menuWindow instanceof CockpitMenuWindow) {
-            CockpitMenuWindow cockpitMenuWindow = (CockpitMenuWindow) menuWindow;
-            cockpitMenuWindow.togglePlane(true);
-            cockpitMenuWindow.draw();
-        }
     }
 
     @Override
     public void executeReleased() {
-
+        MenuWindows.getCurrentMenu().moveSelection(false);
     }
 }

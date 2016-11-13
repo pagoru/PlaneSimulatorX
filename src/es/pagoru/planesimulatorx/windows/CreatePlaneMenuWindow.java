@@ -12,8 +12,6 @@ import java.util.HashMap;
  * Created by Pablo on 30/10/2016.
  */
 public class CreatePlaneMenuWindow extends MenuWindow {
-
-    private Thread createPlaneMenuWindowThread;
     
     private HashMap<String, String> optionsText = new HashMap<>();
     
@@ -134,10 +132,6 @@ public class CreatePlaneMenuWindow extends MenuWindow {
                 .replaceAll("#([a-z])\\{(.*?)\\}", "                              ")
                 .replaceAll("(&)", " ")
         );
-    }
-    
-    public void setCreatePlaneMenuWindowThread(Thread thread){
-        this.createPlaneMenuWindowThread = thread;
     }
     
 }
