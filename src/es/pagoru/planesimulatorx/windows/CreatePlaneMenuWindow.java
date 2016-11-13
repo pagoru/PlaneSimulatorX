@@ -19,6 +19,16 @@ public class CreatePlaneMenuWindow extends MenuWindow {
     
     public CreatePlaneMenuWindow() {
         super("CreatePlane");
+        clearOptionsText();
+    }
+    
+    private void clearOptionsText(){
+        optionsText.clear();
+        String[] options = {"[d]", "[e]", "[f]", "[g]", "[h]", "[i]", "[j]", "[k]", "[l]"};
+        for (String opt :
+                options) {
+            optionsText.put(opt, "______________________________________");
+        }
     }
     
     public void onKeyEvent(KeyListenerEvent keyListenerEvent){
@@ -26,61 +36,81 @@ public class CreatePlaneMenuWindow extends MenuWindow {
             case "[a]":
             case "[b]":
             case "[c]":
-                break;
-            default:
-            
-                String currentSel = optionsText.get(getCurrentSelection()) != null 
-                        ? optionsText.get(getCurrentSelection()) 
-                        : "______________________________________";
-                
-                if(keyListenerEvent.getKeyCode() == KeyEvent.VK_DELETE){
-                    String newCurrentSel = currentSel.replaceAll("_", "");
-                    if(newCurrentSel.length() > 0){
-                        newCurrentSel = newCurrentSel.substring(0, newCurrentSel.length() - 1);
-                        for (int i = 0; i <= (currentSel.length() - currentSel.replace("_", "").length()); i++) {
-                            newCurrentSel += "_";
-                        }
-                        currentSel = newCurrentSel;
-                    }
-                } else {
-                    currentSel = currentSel.replaceFirst("_", (char)keyListenerEvent.getKeyCode() + "");
+                return;
+            case "[h]":
+            case "[i]":
+            case "[j]":
+            case "[k]":
+            case "[l]":
+                if(keyListenerEvent.getKeyCode() >= 'A'
+                        && keyListenerEvent.getKeyCode() <= 'Z'
+                        || keyListenerEvent.getKeyCode() == ' '){
+                    return;
                 }
-                
-                optionsText.put(getCurrentSelection(), currentSel);
-//                System.out.println(optionsText.get(getCurrentSelection()) + "<->" + currentSel);
-//
-//                newRawWindow = getRawWindow().replaceAll("@(" + getCurrentSelection() + ")\\{(.*?)\\}", optionsText.get(getCurrentSelection()) );
-                
-                draw();
                 break;
         }
+
+        String currentSel = optionsText.get(getCurrentSelection());
+
+        if(keyListenerEvent.getKeyCode() == KeyEvent.VK_DELETE){
+            String newCurrentSel = currentSel.replaceAll("_", "");
+            if(newCurrentSel.length() > 0){
+                newCurrentSel = newCurrentSel.substring(0, newCurrentSel.length() - 1);
+                for (int i = 0; i <= (currentSel.length() - currentSel.replace("_", "").length()); i++) {
+                    newCurrentSel += "_";
+                }
+                currentSel = newCurrentSel;
+            }
+        } else {
+            currentSel = currentSel.replaceFirst("_", (char)keyListenerEvent.getKeyCode() + "");
+        }
+
+        optionsText.put(getCurrentSelection(), currentSel);
+        draw();
     }
+    
+    private int getPureIntegerFromOption(String option){
+        String fp = optionsText.get(option).replace("_", "");
+        if(fp.length() == 0){
+            return 0;
+        }
+        return Integer.parseInt(fp.substring(0, (fp.length() > 6 ? 6 : fp.length())));
+    }
+    
+    private int emptyOptions = optionsText.size();
     
     @Override
     public void openCurrentSelection() {
         switch (getCurrentSelection()) {
             case "[a]":
+                optionsText.keySet().stream().forEach(opt -> {
+                    if(optionsText.get(opt).replaceAll("_", "").length() == 0){
+                        emptyOptions--;
+                    }
+                });
+                if(emptyOptions == 0){
+                    return;
+                }
                 ((CockpitMenuWindow)MenuWindows.getMenuWindow("Cockpit")).addPlane(
                         new Plane(
                                 optionsText.get("[d]").replaceAll("_", ""), 
                                 optionsText.get("[e]").replaceAll("_", ""), 
                                 optionsText.get("[f]").replaceAll("_", ""), 
-                                optionsText.get("[g]").replaceAll("_", ""), 
-                                Integer.parseInt(optionsText.get("[h]").replaceAll("_", "")), 
-                                Integer.parseInt(optionsText.get("[i]").replaceAll("_", "")), 
+                                optionsText.get("[g]").replaceAll("_", ""),
+                                getPureIntegerFromOption("[h]"),
+                                getPureIntegerFromOption("[i]"), 
                                 new Vector3Di(
-                                        Integer.parseInt(optionsText.get("[j]").replaceAll("_", "")), 
-                                        Integer.parseInt(optionsText.get("[k]").replaceAll("_", "")), 
-                                        Integer.parseInt(optionsText.get("[l]").replaceAll("_", ""))
+                                        getPureIntegerFromOption("[j]"),
+                                        getPureIntegerFromOption("[k]"),
+                                        getPureIntegerFromOption("[l]")
                                 )
                         )
                 );
-                        //CockpitMenuWindow
-//                new Plane();
+                clearOptionsText();
                 draw();
                 break;
             case "[b]":
-                optionsText.clear();
+                clearOptionsText();
                 draw();
                 break;
             case "[c]":
