@@ -26,13 +26,23 @@ public class InfoMenuWindow extends MenuWindow {
     private String getRawDataFrom(String raw, String regexFirstPart, String data){
         return raw.replaceAll("#" + regexFirstPart + "\\{(.*?)\\}", getFitData(data));
     }
+
+    @Override
+    public void openCurrentSelection() {
+        switch (getCurrentSelection()) {
+            case "[a]":
+                MenuWindows.closeLastMenu();
+                break;
+        }
+    }
     
+    @Override
     public void draw(){
         String rawWindow = getRawWindow();
         List<Plane> planeList = ((CockpitMenuWindow)MenuWindows.getMenuWindow("Cockpit")).getPlanes();
         
         int currentInfo = 0;
-        String[] orderInfoSymbol = {"@", "\\$", "&", "\\*", "Ç", "Ñ"};
+        String[] orderInfoSymbol = {"@", "\\$", "&", "%", "Ç", "Ñ"};
         String[] planeListInfo = new String[6];
         
         for (int i = 0; i < (planeList.size() > 4 ? 4 : planeList.size()); i++) {
@@ -99,12 +109,13 @@ public class InfoMenuWindow extends MenuWindow {
         
         Window.getInstance().loadWindow(
                 rawWindow
-                        .replaceAll("\\[([a-z])\\]", "[*]")
+                        .replace(selections.get(currentSelection), "[*]")
+                        .replaceAll("\\[([a-z])\\]", "[ ]")
                         .replaceAll("#[a-z][0-9]\\{(.*?)\\}", "            ")
                         .replaceAll("(@)", " ")
                         .replaceAll("(\\$)", " ")
                         .replaceAll("(&)", " ")
-                        .replaceAll("(\\*)", " ")
+                        .replaceAll("(%)", " ")
                         .replaceAll("(Ñ)", " ")
                         .replaceAll("(Ç)", " ")
         );

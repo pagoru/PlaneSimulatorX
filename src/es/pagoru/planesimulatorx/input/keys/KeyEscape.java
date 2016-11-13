@@ -2,6 +2,9 @@ package es.pagoru.planesimulatorx.input.keys;
 
 import es.pagoru.planesimulatorx.Window;
 import es.pagoru.planesimulatorx.input.KeyInterface;
+import es.pagoru.planesimulatorx.windows.GoodbyeMenuWindow;
+import es.pagoru.planesimulatorx.windows.MainMenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.awt.event.KeyEvent;
@@ -23,7 +26,11 @@ public class KeyEscape implements KeyInterface {
 
     @Override
     public void executeReleased() {
-        if(!MenuWindows.getCurrentMenu().getName().equalsIgnoreCase("MainMenu")){
+        MenuWindow menuWindow = MenuWindows.getCurrentMenu();
+        if(menuWindow instanceof GoodbyeMenuWindow){
+            return;
+        }
+        if(!(menuWindow instanceof MainMenuWindow)){
             MenuWindows.closeLastMenu();
             return;
         }
