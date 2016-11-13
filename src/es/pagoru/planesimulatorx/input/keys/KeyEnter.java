@@ -3,16 +3,17 @@ package es.pagoru.planesimulatorx.input.keys;
 import es.pagoru.planesimulatorx.input.KeyInterface;
 import es.pagoru.planesimulatorx.windows.MenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
+import es.pagoru.planesimulatorx.windows.cockpit.CockpitMenuWindowThread;
 
 import java.awt.event.KeyEvent;
 
 /**
- * Created by Pablo on 29/10/2016.
+ * Created by Pablo on 13/11/2016.
  */
-public class KeyDown implements KeyInterface {
+public class KeyEnter implements KeyInterface {
     @Override
     public int getKeyCode() {
-        return KeyEvent.VK_DOWN;
+        return KeyEvent.VK_ENTER;
     }
 
     @Override
@@ -23,6 +24,10 @@ public class KeyDown implements KeyInterface {
     @Override
     public void executeReleased() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();
-        menuWindow.moveSelection(false);
+        if(menuWindow.getName().equalsIgnoreCase("Cockpit")){
+            Thread t = new Thread(new CockpitMenuWindowThread());
+            t.start();
+        }
+        menuWindow.openCurrentSelection();
     }
 }

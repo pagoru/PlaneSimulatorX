@@ -17,6 +17,8 @@ public class CreatePlaneMenuWindow extends MenuWindow {
     
     private HashMap<String, String> optionsText = new HashMap<>();
     
+    private int emptyOptions = optionsText.size();
+    
     public CreatePlaneMenuWindow() {
         super("CreatePlane");
         clearOptionsText();
@@ -29,6 +31,7 @@ public class CreatePlaneMenuWindow extends MenuWindow {
                 options) {
             optionsText.put(opt, "______________________________________");
         }
+        emptyOptions = optionsText.size();
     }
     
     public void onKeyEvent(KeyListenerEvent keyListenerEvent){
@@ -77,8 +80,6 @@ public class CreatePlaneMenuWindow extends MenuWindow {
         return Integer.parseInt(fp.substring(0, (fp.length() > 6 ? 6 : fp.length())));
     }
     
-    private int emptyOptions = optionsText.size();
-    
     @Override
     public void openCurrentSelection() {
         switch (getCurrentSelection()) {
@@ -88,24 +89,23 @@ public class CreatePlaneMenuWindow extends MenuWindow {
                         emptyOptions--;
                     }
                 });
-                if(emptyOptions == 0){
-                    return;
+                if(emptyOptions != 0){
+                    ((CockpitMenuWindow)MenuWindows.getMenuWindow("Cockpit")).addPlane(
+                            new Plane(
+                                    optionsText.get("[d]").replaceAll("_", ""),
+                                    optionsText.get("[e]").replaceAll("_", ""),
+                                    optionsText.get("[f]").replaceAll("_", ""),
+                                    optionsText.get("[g]").replaceAll("_", ""),
+                                    getPureIntegerFromOption("[h]"),
+                                    getPureIntegerFromOption("[i]"),
+                                    new Vector3Di(
+                                            getPureIntegerFromOption("[j]"),
+                                            getPureIntegerFromOption("[k]"),
+                                            getPureIntegerFromOption("[l]")
+                                    )
+                            )
+                    );
                 }
-                ((CockpitMenuWindow)MenuWindows.getMenuWindow("Cockpit")).addPlane(
-                        new Plane(
-                                optionsText.get("[d]").replaceAll("_", ""), 
-                                optionsText.get("[e]").replaceAll("_", ""), 
-                                optionsText.get("[f]").replaceAll("_", ""), 
-                                optionsText.get("[g]").replaceAll("_", ""),
-                                getPureIntegerFromOption("[h]"),
-                                getPureIntegerFromOption("[i]"), 
-                                new Vector3Di(
-                                        getPureIntegerFromOption("[j]"),
-                                        getPureIntegerFromOption("[k]"),
-                                        getPureIntegerFromOption("[l]")
-                                )
-                        )
-                );
                 clearOptionsText();
                 draw();
                 break;

@@ -43,6 +43,9 @@ public class MainMenuWindow extends MenuWindow{
             case "[b]":
                 MenuWindows.openMenu("Cockpit");
                 break;
+            case "[d]":
+                MenuWindows.openMenu("Info");
+                break;
             case "[e]":
                 Window.getInstance().close();
                 break;

@@ -28,7 +28,7 @@ public class CockpitMenuWindow extends MenuWindow {
     public CockpitMenuWindow() {
         super("Cockpit");
         planes = new ArrayList<>();
-        currentPlane = 0;//MODIFY
+        currentPlane = 0;
     }
 
     public CockpitMenuWindowThread getCockpitMenuWindowThread() {
@@ -47,6 +47,22 @@ public class CockpitMenuWindow extends MenuWindow {
         planes.add(plane);
     }
 
+    public void togglePlane(boolean right){
+        if(right){
+            if(planes.size() - 1 > currentPlane){
+                currentPlane++;
+            } else {
+                currentPlane = 0;
+            }
+            return;
+        }
+        if(0 < currentPlane){
+            currentPlane--;
+        } else {
+            currentPlane = planes.size() - 1;
+        }
+    }
+    
     public String[] addImageOnTop(String[] originalImage, String[] topImage, String character){
         for (int r = 0; r < originalImage.length; r++) {
             if(!topImage[r].equalsIgnoreCase(character)){

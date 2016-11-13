@@ -34,7 +34,7 @@ public class KeyListenerEvent implements KeyListener {
             }
         }
         if(!keyboardEvent.equals(lastKeyboardEvent)){
-            KeyI keyboardKey = KeyboardEventHandler.getKeyBoardKeyList().stream()
+            KeyInterface keyboardKey = KeyboardEventHandler.getKeyBoardKeyList().stream()
                     .filter(key -> key.getKeyCode() == keyboardEvent.getKeyCode())
                     .findFirst().orElse(null);
             if(keyboardKey != null){
