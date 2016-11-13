@@ -63,7 +63,7 @@ public class MaintenanceMenuWindow extends MenuWindow{
             }
             planeArray[i] = planeList.get(i);
             if(planeArray[i] != null){
-                planeArrayInfo[i][0] = "[" + planeArray[i].getPlate() + "] - " 
+                planeArrayInfo[i][0] = planeArray[i].getOwner() + " [" + planeArray[i].getPlate() + "] - " 
                         + planeArray[i].getBrand() + " " + planeArray[i].getModel();
                 planeArrayInfo[i][1] = (planeArray[i].getPosition().getX() > 1000
                         || planeArray[i].getPosition().getX() < 0
