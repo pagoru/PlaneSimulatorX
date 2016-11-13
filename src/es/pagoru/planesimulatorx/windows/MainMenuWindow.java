@@ -16,7 +16,7 @@ public class MainMenuWindow extends MenuWindow{
 
     @Override
     public void draw() {
-        String raw = rawWindow;
+        String raw = getRawWindow();
         String currentOption = getCurrentSelection().replace("[", "").replace("]", "");
         String[] rawImage = Window.getWindowString("mainmenu/" + currentOption, "UTF-8").split("");
 

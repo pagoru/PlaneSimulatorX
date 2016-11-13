@@ -58,7 +58,7 @@ public class CockpitMenuWindow extends MenuWindow {
     
     @Override
     public void draw() {
-        String raw = rawWindow;
+        String raw = getRawWindow();
 
         int x = (int) (((float)LINE_SIZE / 360.0f) * getPlane().getYaw());
         int y = 66 - (getPlane().getPosition().getY()/50);

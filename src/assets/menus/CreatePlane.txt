@@ -1,24 +1,24 @@
 ╒════════════════════════════════╤════════════════════════════════════════════════════════════╕
 │                                │                                                            │
-│     Donar d'alta un avió       │   [d] Model       @a{                                  }   │
+│     Donar d'alta un avió       │   [d] Model       @d{                                  }   │
 │                                │                                                            │
-╞════════════════════════════════╡   [e] Fabricant   @b{                                  }   │
+╞════════════════════════════════╡   [e] Fabricant   @e{                                  }   │
 │                                │                                                            │
-│  [a] Donar d'alta              │   [f] Matricula   @c{                                  }   │
+│  [a] Donar d'alta              │   [f] Matricula   @f{                                  }   │
 │                                │                                                            │
-│  [b] Borrar els camps          │   [g] Propietari  @d{                                  }   │
-│                                │                                                            │
-│                                │                                                            │
-│                                │   [h] Capacitat   @e{                                  }   │
-│                                │                                                            │
-│                                │   [i] Combustible @f{                                  }   │
+│  [b] Borrar els camps          │   [g] Propietari  @g{                                  }   │
 │                                │                                                            │
 │                                │                                                            │
-│                                │   [j] X           @g{                                  }   │
+│                                │   [h] Capacitat   @h{                                  }   │
+│                                │                                                            │
+│                                │   [i] Combustible @i{                                  }   │
+│                                │                                                            │
+│                                │                                                            │
+│                                │   [j] X           @j{                                  }   │
 │  [c] Tornar al menú princiapl  │                                                            │
-│                                │   [k] Y           @h{                                  }   │
+│                                │   [k] Y           @k{                                  }   │
 ╞════════════════════════════════╡                                                            │
-│ #i{                          } │   [l] Z           @i{                                  }   │
+│ #i{                          } │   [l] Z           @l{                                  }   │
 │ #i{                          } │                                                            │
 │ #i{                          } │                                                            │
 ╘════════════════════════════════╧════════════════════════════════════════════════════════════╛

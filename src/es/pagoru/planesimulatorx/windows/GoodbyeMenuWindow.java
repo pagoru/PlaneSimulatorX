@@ -13,6 +13,6 @@ public class GoodbyeMenuWindow extends MenuWindow {
 
     @Override
     public void draw(){
-        Window.getInstance().loadWindow(rawWindow);
+        Window.getInstance().loadWindow(getRawWindow());
     }
 }

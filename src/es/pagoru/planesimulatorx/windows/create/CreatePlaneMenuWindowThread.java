@@ -6,6 +6,7 @@ import es.pagoru.planesimulatorx.windows.MenuWindows;
 /**
  * Created by Pablo on 12/11/2016.
  */
+@Deprecated
 public class CreatePlaneMenuWindowThread extends Thread {
     
     private CreatePlaneMenuWindow createPlaneMenuWindow;

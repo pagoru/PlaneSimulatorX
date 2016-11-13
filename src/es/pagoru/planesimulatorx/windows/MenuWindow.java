@@ -25,7 +25,7 @@ public class MenuWindow {
     protected String name;
     protected int currentSelection;
 
-    protected String rawWindow;
+    private String rawWindow;
     protected List<String> selections;
 
     public MenuWindow(String name){
@@ -47,6 +47,10 @@ public class MenuWindow {
         currentSelection = up ? (currentSelection == 0 ? (selections.size()-1) : currentSelection - 1)
                 : (currentSelection == (selections.size()-1) ? 0 : currentSelection + 1);
         draw();
+    }
+
+    public String getRawWindow(){
+        return this.rawWindow;
     }
 
     public void draw(){

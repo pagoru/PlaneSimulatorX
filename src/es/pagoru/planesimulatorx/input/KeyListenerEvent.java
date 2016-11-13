@@ -1,5 +1,6 @@
 package es.pagoru.planesimulatorx.input;
 
+import es.pagoru.planesimulatorx.windows.CreatePlaneMenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.awt.event.KeyEvent;
@@ -21,6 +22,16 @@ public class KeyListenerEvent implements KeyListener {
                 firstKey = false;
             }
             return;
+        }
+        if(MenuWindows.getCurrentMenu() instanceof CreatePlaneMenuWindow){
+            if((keyboardEvent.getKeyCode() >= 'A' && keyboardEvent.getKeyCode() <= 'Z')
+                    || (keyboardEvent.getKeyCode() >= '0' && keyboardEvent.getKeyCode() <= '9')
+                    || keyboardEvent.getKeyCode() == ' ' 
+                    || keyboardEvent.getKeyCode() == KeyEvent.VK_DELETE){
+                if(!pressed){
+                    ((CreatePlaneMenuWindow) MenuWindows.getCurrentMenu()).onKeyEvent(keyboardEvent);
+                }
+            }
         }
         if(!keyboardEvent.equals(lastKeyboardEvent)){
             KeyI keyboardKey = KeyboardEventHandler.getKeyBoardKeyList().stream()
@@ -53,11 +64,11 @@ public class KeyListenerEvent implements KeyListener {
         this.keyOption = keyOption;
     }
 
-    private KeyListenerEvent.KeyOption getKeyOption() {
+    public KeyListenerEvent.KeyOption getKeyOption() {
         return keyOption;
     }
 
-    private int getKeyCode() {
+    public int getKeyCode() {
         return keyCode;
     }
 
