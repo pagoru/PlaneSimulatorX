@@ -74,7 +74,7 @@ public class Plane {
     private FlightControlPositionsUpDown flightControlPositionsUpDown;
     private FlightControlThrottlePosition flightControlThrottlePosition;
 
-    public Plane(String plate, String model, String brand){
+    public Plane(String model, String brand, String plate){
         this.plate = plate;
         this.model = model;
         this.brand = brand;
@@ -91,12 +91,16 @@ public class Plane {
         this.flightControlThrottlePosition = FlightControlThrottlePosition.OFF;
     }
     
-    public Plane(String plate, String model, String brand, String owner, int capacity, int kerosene, Vector3Di position){
-        this(plate, model, brand);
+    public Plane(String model, String brand, String plate, String owner, int capacity, int kerosene, Vector3Di position){
+        this(model, brand, plate);
         this.owner = owner;
         this.capacity = capacity;
         this.kerosene = kerosene;
         this.position = position;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 
     public boolean isBreaks() {

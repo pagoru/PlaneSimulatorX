@@ -22,6 +22,19 @@ public class MenuWindows {
         menuWindowList.add(new CreatePlaneMenuWindow());
         menuWindowList.add(new GoodbyeMenuWindow());
         menuWindowList.add(new CockpitMenuWindow());
+
+        CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)getMenuWindow("Cockpit"));
+        cockpitMenuWindow.addPlane(
+            new Plane(
+                    "A300",
+                    "AIRBUS",
+                    "AA3HKK",
+                    "AMERICAN AIRLINES",
+                    97,
+                    8000,
+                    new Vector3Di(0, 0, 0)
+            )
+        );
     }
 
     public static MenuWindow getMenuWindow(String name){
@@ -34,19 +47,6 @@ public class MenuWindows {
         switch(name){
             case "Cockpit":
                 CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)getCurrentMenu());
-                if(cockpitMenuWindow.getPlane() == null){
-                    cockpitMenuWindow.addPlane(
-                            new Plane(
-                                    "A300",
-                                    "AIRBUS",
-                                    "AA3HKK",
-                                    "AMERICAN AIRLINES",
-                                    97,
-                                    8000,
-                                    new Vector3Di(0, 0, 0)
-                            )
-                    );
-                }
                 thread = new CockpitMenuWindowThread();
                 cockpitMenuWindow.setCockpitMenuWindowThread(thread);
                 thread.start();

@@ -124,8 +124,32 @@ public class CockpitMenuWindow extends MenuWindow {
             count++;
         }
         
-        raw = raw.replaceAll("\\[([A-z])\\]", "[*]");
+        String planeInfo = getCenterText(
+                getPlane().getOwner() + " ["
+                + getPlane().getPlate() + "] - "
+                + getPlane().getBrand() + " "
+                + getPlane().getModel()
+        );
+
+        for (int i = 0; i < planeInfo.length(); i++) {
+            raw = raw.replaceFirst("@", planeInfo.substring(i, i + 1));
+        }
+        
+        raw = raw.replaceAll("\\[([A-z])\\]", "[*]").replaceAll("@", " ");
         Window.getInstance().loadWindow(raw);
+    }
+
+    private String getCenterText(String text){
+        int c = (93 - text.length())/2;
+        return getAmountOfString(" ", c) + text + getAmountOfString(" ", (c%2 == 0? c : c +1));
+    }
+
+    private String getAmountOfString(String text, int quantity){
+        String nText = "";
+        for (int i = 0; i < quantity; i++){
+            nText += text;
+        }
+        return nText;
     }
 
     private String[] setTextInPosition(String[] raw, String text, int initialPosition){
