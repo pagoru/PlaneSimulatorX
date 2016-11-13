@@ -1,6 +1,8 @@
-package es.pagoru.planesimulatorx.windows;
+package es.pagoru.planesimulatorx.windows.menus;
 
 import es.pagoru.planesimulatorx.Window;
+import es.pagoru.planesimulatorx.windows.MenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Pablo on 29/10/2016.
  */
-public class MainMenuWindow extends MenuWindow{
+public class MainMenuWindow extends MenuWindow {
 
     public MainMenuWindow() {
         super("MainMenu");

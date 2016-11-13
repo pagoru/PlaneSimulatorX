@@ -1,10 +1,10 @@
 package es.pagoru.planesimulatorx.input.keys;
 
 import es.pagoru.planesimulatorx.input.KeyInterface;
-import es.pagoru.planesimulatorx.windows.CockpitMenuWindow;
+import es.pagoru.planesimulatorx.windows.menus.CockpitMenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
-import es.pagoru.planesimulatorx.windows.cockpit.CockpitMenuWindowThread;
+import es.pagoru.planesimulatorx.windows.menus.cockpit.CockpitMenuWindowThread;
 
 import java.awt.event.KeyEvent;
 

@@ -1,9 +1,11 @@
-package es.pagoru.planesimulatorx.windows;
+package es.pagoru.planesimulatorx.windows.menus;
 
 import es.pagoru.planesimulatorx.Window;
 import es.pagoru.planesimulatorx.utils.StringUtils;
-import es.pagoru.planesimulatorx.windows.cockpit.CockpitMenuWindowThread;
-import es.pagoru.planesimulatorx.windows.cockpit.Plane;
+import es.pagoru.planesimulatorx.windows.MenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindows;
+import es.pagoru.planesimulatorx.windows.menus.cockpit.CockpitMenuWindowThread;
+import es.pagoru.planesimulatorx.windows.menus.cockpit.Plane;
 import es.pagoru.planesimulatorx.utils.Vector3Di;
 
 import java.util.ArrayList;
@@ -50,8 +52,13 @@ public class CockpitMenuWindow extends MenuWindow {
                 break;
         }
     }
+    
     public List<Plane> getPlanes(){
         return planes;
+    }
+    
+    public void removePlane(int index){
+        planes.remove(index);
     }
     
     public void setCockpitMenuWindowThread(Thread cockpitMenuWindowThread) {
@@ -61,7 +68,20 @@ public class CockpitMenuWindow extends MenuWindow {
     public Plane getPlane() {
         return (planes.size() == 0) ? null : planes.get(currentPlane);
     }
-
+    
+    public void createBasicPlane(){
+        addPlane(new Plane(
+                "A300",
+                "AIRBUS",
+                "AA3HKK",
+                "AMERICAN AIRLINES",
+                97,
+                8000,
+                new Vector3Di(0, 0, 0)
+        ));
+        this.currentPlane = 0;
+    }
+    
     public void addPlane(Plane plane){
         planes.add(plane);
     }

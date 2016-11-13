@@ -1,4 +1,4 @@
-package es.pagoru.planesimulatorx.windows.cockpit;
+package es.pagoru.planesimulatorx.windows.menus.cockpit;
 
 import es.pagoru.planesimulatorx.utils.Vector3Di;
 

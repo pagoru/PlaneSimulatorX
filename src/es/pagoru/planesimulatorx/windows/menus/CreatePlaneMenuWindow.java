@@ -1,9 +1,11 @@
-package es.pagoru.planesimulatorx.windows;
+package es.pagoru.planesimulatorx.windows.menus;
 
 import es.pagoru.planesimulatorx.Window;
 import es.pagoru.planesimulatorx.input.KeyListenerEvent;
 import es.pagoru.planesimulatorx.utils.Vector3Di;
-import es.pagoru.planesimulatorx.windows.cockpit.Plane;
+import es.pagoru.planesimulatorx.windows.MenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindows;
+import es.pagoru.planesimulatorx.windows.menus.cockpit.Plane;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
@@ -88,7 +90,7 @@ public class CreatePlaneMenuWindow extends MenuWindow {
                     }
                 });
                 if(emptyOptions != 0){
-                    ((CockpitMenuWindow)MenuWindows.getMenuWindow("Cockpit")).addPlane(
+                    ((CockpitMenuWindow) MenuWindows.getMenuWindow("Cockpit")).addPlane(
                             new Plane(
                                     optionsText.get("[d]").replaceAll("_", ""),
                                     optionsText.get("[e]").replaceAll("_", ""),

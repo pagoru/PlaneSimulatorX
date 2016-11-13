@@ -1,9 +1,11 @@
-package es.pagoru.planesimulatorx.windows;
+package es.pagoru.planesimulatorx.windows.menus;
 
 import es.pagoru.planesimulatorx.Window;
 import es.pagoru.planesimulatorx.utils.StringUtils;
 import es.pagoru.planesimulatorx.utils.Vector3Di;
-import es.pagoru.planesimulatorx.windows.cockpit.Plane;
+import es.pagoru.planesimulatorx.windows.MenuWindow;
+import es.pagoru.planesimulatorx.windows.MenuWindows;
+import es.pagoru.planesimulatorx.windows.menus.cockpit.Plane;
 
 import java.util.List;
 import java.util.stream.Collectors;

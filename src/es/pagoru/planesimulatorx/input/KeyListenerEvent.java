@@ -1,6 +1,6 @@
 package es.pagoru.planesimulatorx.input;
 
-import es.pagoru.planesimulatorx.windows.CreatePlaneMenuWindow;
+import es.pagoru.planesimulatorx.windows.menus.CreatePlaneMenuWindow;
 import es.pagoru.planesimulatorx.windows.MenuWindows;
 
 import java.awt.event.KeyEvent;
