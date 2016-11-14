@@ -16,6 +16,10 @@ public class KeyS implements KeyInterface {
         return KeyEvent.VK_S;
     }
 
+    /**
+     * Quan la tecla S es presa, els controls de l'avió actual
+     * dins del menú del Cockpit es mouen cap abaix.
+     */
     @Override
     public void executePressed() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

@@ -16,6 +16,10 @@ public class KeyQ implements KeyInterface {
         return KeyEvent.VK_Q;
     }
 
+    /**
+     * Quan la tecla Q es presa, els controls de l'avió actual
+     * dins del menú del Cockpit activen o desactiven el motor.
+     */
     @Override
     public void executePressed() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

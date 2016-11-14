@@ -16,26 +16,14 @@ public class MainMenuWindow extends MenuWindow {
         super("MainMenu");
     }
 
-    @Override
-    public void draw() {
-        String raw = getRawWindow();
-        String currentOption = getCurrentSelection().replace("[", "").replace("]", "");
-        String[] rawImage = Window.getWindowString("mainmenu/" + currentOption, "UTF-8").split("");
-
-        Pattern p = Pattern.compile("&");
-        Matcher m = p.matcher(raw);
-        int count = 0;
-        while (m.find()){
-            raw = raw.replaceFirst("&", rawImage[count]);
-            count++;
-        }
-        raw = raw.replace(selections.get(currentSelection), "[*]")
-                .replaceAll("\\[([A-z])\\]", "[ ]")
-                .replaceAll("@([A-z])\\{(.*?)\\}", "______________________________________")
-                .replaceAll("#([A-z])\\{(.*?)\\}", "                              ");
-        Window.getInstance().loadWindow(raw);
-    }
-
+    /**
+     * Obre la selecció del menu actual.
+     * a: Obre el menu de creació d'avions.
+     * b: Obre el menu de gestió d'avions.
+     * c: Obre el menu de manteniment de l'espai aeri.
+     * d: Obre el menu d'informació de l'espai aeri.
+     * e: Tanca el joc.
+     */
     @Override
     public void openCurrentSelection() {
         switch (getCurrentSelection()){
@@ -55,5 +43,29 @@ public class MainMenuWindow extends MenuWindow {
                 Window.getInstance().close();
                 break;
         }
+    }
+
+    /**
+     * Dibuixa per pantalla el menú principal.
+     * Canvia la imatge de la dreta en funció de la selecció actual.
+     */
+    @Override
+    public void draw() {
+        String raw = getRawWindow();
+        String currentOption = getCurrentSelection().replace("[", "").replace("]", "");
+        String[] rawImage = Window.getWindowString("mainmenu/" + currentOption, "UTF-8").split("");
+
+        Pattern p = Pattern.compile("&");
+        Matcher m = p.matcher(raw);
+        int count = 0;
+        while (m.find()){
+            raw = raw.replaceFirst("&", rawImage[count]);
+            count++;
+        }
+        raw = raw.replace(selections.get(currentSelection), "[*]")
+                .replaceAll("\\[([A-z])\\]", "[ ]")
+                .replaceAll("@([A-z])\\{(.*?)\\}", "______________________________________")
+                .replaceAll("#([A-z])\\{(.*?)\\}", "                              ");
+        Window.getInstance().loadWindow(raw);
     }
 }

@@ -16,6 +16,10 @@ public class KeyR implements KeyInterface {
         return KeyEvent.VK_R;
     }
 
+    /**
+     * Quan la tecla R es presa, els controls de l'avió actual
+     * dins del menú del Cockpit aumenten la velocitat.
+     */
     @Override
     public void executePressed() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

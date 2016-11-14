@@ -11,11 +11,16 @@ import java.awt.event.KeyEvent;
  * Created by Pablo on 13/11/2016.
  */
 public class KeyA implements KeyInterface{
+
     @Override
     public int getKeyCode() {
         return KeyEvent.VK_A;
     }
 
+    /**
+     * Quan la tecla A es presa, els controls de l'avió actual
+     * dins del menú del Cockpit es mouen cap a la esquerra.
+     */
     @Override
     public void executePressed() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

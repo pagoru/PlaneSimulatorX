@@ -12,6 +12,9 @@ public class GoodbyeMenuWindow extends MenuWindow {
         super("GoodbyeWindow");
     }
 
+    /**
+     * Mostra la pantalla actual sense modificar res.
+     */
     @Override
     public void draw(){
         Window.getInstance().loadWindow(getRawWindow());

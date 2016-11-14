@@ -43,7 +43,7 @@ public class MaintenanceMenuWindow extends MenuWindow{
         String raw = getRawWindow();
         
         List<Plane> planeList = ((CockpitMenuWindow) MenuWindows.getMenuWindow("Cockpit"))
-                .getPlanes()
+                .getPlaneList()
                 .stream()
                 .filter(p -> 
                         p.getPosition().getY() == 0

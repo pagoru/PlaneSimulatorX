@@ -14,16 +14,25 @@ import java.util.HashMap;
  * Created by Pablo on 30/10/2016.
  */
 public class CreatePlaneMenuWindow extends MenuWindow {
-    
+
+    /**
+     * Mapa de contingut de les opcions per completar el formulari de creació d'avions.
+     */
     private HashMap<String, String> optionsText = new HashMap<>();
-    
+
+    /**
+     * Mida del contingut del mapa.
+     */
     private int emptyOptions = optionsText.size();
     
     public CreatePlaneMenuWindow() {
         super("CreatePlane");
         clearOptionsText();
     }
-    
+
+    /**
+     * Neteja les opcions disponibles en el mapa i asigna les basiques.
+     */
     private void clearOptionsText(){
         optionsText.clear();
         String[] options = {"[d]", "[e]", "[f]", "[g]", "[h]", "[i]", "[j]", "[k]", "[l]"};
@@ -33,7 +42,15 @@ public class CreatePlaneMenuWindow extends MenuWindow {
         }
         emptyOptions = optionsText.size();
     }
-    
+
+    /**
+     * Quan es selecciona i es prem una opció, es permet la escriptura en el camp de text,
+     * comprovant si es pot escriure text o números.
+     * a, b i c: Retornan el event.
+     * d, e, f, g: Fan les funcions del formulari on es pot introduir qualsevol caracter.
+     * h, i, j, k, l: Fan les funcions del formulari en las que només es pot introduir numeració.
+     * @param keyListenerEvent
+     */
     public void onKeyEvent(KeyListenerEvent keyListenerEvent){
         switch (getCurrentSelection()){
             case "[a]":
@@ -71,7 +88,12 @@ public class CreatePlaneMenuWindow extends MenuWindow {
         optionsText.put(getCurrentSelection(), currentSel);
         draw();
     }
-    
+
+    /**
+     * Retorna un integer parsejat en funció del camp escrit amb un limit de 6 digits.
+     * @param option
+     * @return
+     */
     private int getPureIntegerFromOption(String option){
         String fp = optionsText.get(option).replace("_", "");
         if(fp.length() == 0){
@@ -79,7 +101,13 @@ public class CreatePlaneMenuWindow extends MenuWindow {
         }
         return Integer.parseInt(fp.substring(0, (fp.length() > 6 ? 6 : fp.length())));
     }
-    
+
+    /**
+     * Al premer la selecció del menú actual, s'executa una funció.
+     * a: Es comproven si els camps del formulari son correctes i es crea un nou avió.
+     * b: Neteja el text dels camps del formulari.
+     * c: Tanca el menú.
+     */
     @Override
     public void openCurrentSelection() {
         switch (getCurrentSelection()) {
@@ -119,6 +147,9 @@ public class CreatePlaneMenuWindow extends MenuWindow {
         }
     }
 
+    /**
+     * Mostra per pantalla el menu actual.
+     */
     @Override
     public void draw() {
         String newRawWindow = getRawWindow();

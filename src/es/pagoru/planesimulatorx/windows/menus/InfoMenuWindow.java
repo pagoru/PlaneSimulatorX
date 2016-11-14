@@ -19,16 +19,33 @@ public class InfoMenuWindow extends MenuWindow {
         super("Info");
     }
 
+    /**
+     * Retorna el mateix string que se li pasa com a variable de
+     * manera que no sobrepasi el limit de la mida establerta.
+     * @param info
+     * @return
+     */
     private String getFitData(String info){
         String nInfo = info.substring(0, (info.length() > 12) ? 12 : info.length());
         nInfo += StringUtils.getAmountOfString(" ", 12 - nInfo.length());
         return nInfo;
     }
-    
+
+    /**
+     * retorna un string mitjançant un regex i un text que es posará en el seu lloc.
+     * @param raw
+     * @param regexFirstPart
+     * @param data
+     * @return
+     */
     private String getRawDataFrom(String raw, String regexFirstPart, String data){
         return raw.replaceAll("#" + regexFirstPart + "\\{(.*?)\\}", getFitData(data));
     }
 
+    /**
+     * Al premer la selecció del menú actual, s'executa una funció.
+     * a: Tanca el menú existent.
+     */
     @Override
     public void openCurrentSelection() {
         switch (getCurrentSelection()) {
@@ -37,11 +54,15 @@ public class InfoMenuWindow extends MenuWindow {
                 break;
         }
     }
-    
+
+    /**
+     * Dibuixa per pantalla el menu actual. Substitueix mitjançant regex tots els camps
+     * disponibles per pantalla amb les variables de la llista d'avions.
+     */
     @Override
     public void draw(){
         String rawWindow = getRawWindow();
-        List<Plane> planeList = ((CockpitMenuWindow)MenuWindows.getMenuWindow("Cockpit")).getPlanes();
+        List<Plane> planeList = ((CockpitMenuWindow)MenuWindows.getMenuWindow("Cockpit")).getPlaneList();
         
         int currentInfo = 0;
         String[] orderInfoSymbol = {"@", "\\$", "&", "%", "Ç", "Ñ"};

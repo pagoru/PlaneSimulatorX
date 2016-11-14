@@ -20,6 +20,10 @@ public class KeyDown implements KeyInterface {
 
     }
 
+    /**
+     * Una vegada la flecha cap abaix es deixa anar,
+     * es mou l'opció actual del menu cap a la següent.
+     */
     @Override
     public void executeReleased() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

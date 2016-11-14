@@ -18,6 +18,10 @@ public class KeyLeft implements KeyInterface {
     public void executePressed() {
     }
 
+    /**
+     * Una vegada la flecha cap a l'esquerra es deixa anar,
+     * es mou l'opció actual del menu cap a la anterior.
+     */
     @Override
     public void executeReleased() {
         MenuWindows.getCurrentMenu().moveSelection(true);

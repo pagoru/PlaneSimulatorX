@@ -19,6 +19,10 @@ public class KeyUP implements KeyInterface {
 
     }
 
+    /**
+     * Una vegada la flecha cap adalt es deixa anar,
+     * es mou l'opció actual del menu cap a la anterior.
+     */
     @Override
     public void executeReleased() {
         MenuWindows.getCurrentMenu().moveSelection(true);

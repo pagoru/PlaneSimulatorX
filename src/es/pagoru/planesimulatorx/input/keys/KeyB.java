@@ -16,6 +16,10 @@ public class KeyB implements KeyInterface {
         return KeyEvent.VK_B;
     }
 
+    /**
+     * Quan la tecla B es presa, els controls de l'avió actual
+     * dins del menú del Cockpit activen o desactiven els frens.
+     */
     @Override
     public void executePressed() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

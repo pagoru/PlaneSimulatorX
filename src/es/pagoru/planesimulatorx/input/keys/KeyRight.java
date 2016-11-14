@@ -18,6 +18,10 @@ public class KeyRight implements KeyInterface {
     public void executePressed() {
     }
 
+    /**
+     * Una vegada la flecha cap a la dreta es deixa anar,
+     * es mou l'opció actual del menu cap a la següent.
+     */
     @Override
     public void executeReleased() {
         MenuWindows.getCurrentMenu().moveSelection(false);

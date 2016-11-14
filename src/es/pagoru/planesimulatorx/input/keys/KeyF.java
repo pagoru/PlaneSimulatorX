@@ -16,6 +16,10 @@ public class KeyF implements KeyInterface {
         return KeyEvent.VK_F;
     }
 
+    /**
+     * Quan la tecla F es presa, els controls de l'avió actual
+     * dins del menú del Cockpit disminueix la velocitat.
+     */
     @Override
     public void executePressed() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

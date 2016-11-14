@@ -16,6 +16,10 @@ public class KeyW implements KeyInterface{
         return KeyEvent.VK_W;
     }
 
+    /**
+     * Quan la tecla W es presa, els controls de l'avió actual
+     * dins del menú del Cockpit es mouen cap adalt.
+     */
     @Override
     public void executePressed() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

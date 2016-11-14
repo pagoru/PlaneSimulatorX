@@ -37,7 +37,7 @@ public class MenuWindows {
         switch(name){
             case "Cockpit":
                 CockpitMenuWindow cockpitMenuWindow = ((CockpitMenuWindow)getCurrentMenu());
-                if(cockpitMenuWindow.getPlanes().size() == 0){
+                if(cockpitMenuWindow.getPlaneList().size() == 0){
                     cockpitMenuWindow.createBasicPlane();
                 }
                 thread = new CockpitMenuWindowThread();

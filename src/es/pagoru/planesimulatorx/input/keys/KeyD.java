@@ -16,6 +16,10 @@ public class KeyD implements KeyInterface {
         return KeyEvent.VK_D;
     }
 
+    /**
+     * Quan la tecla D es presa, els controls de l'avió actual
+     * dins del menú del Cockpit es mouen cap a la dreta.
+     */
     @Override
     public void executePressed() {
         MenuWindow menuWindow = MenuWindows.getCurrentMenu();

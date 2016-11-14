@@ -15,14 +15,26 @@ public class Vector3Di {
         this.z = z;
     }
 
+    /**
+     * Asigna el valor de x
+     * @param x
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Asigna  el valor de y
+     * @param y
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * Asigna el valor de z
+     * @param z
+     */
     public void setZ(int z) {
         this.z = z;
     }
@@ -51,14 +63,26 @@ public class Vector3Di {
         return z;
     }
 
+    /**
+     * Suma un numero a X
+     * @param x
+     */
     public void addX(int x){
         this.x += x;
     }
 
+    /**
+     * Suma un numero a Y
+     * @param y
+     */
     public void addY(int y){
         this.y += y;
     }
 
+    /**
+     * Suma un numero a Z
+     * @param z
+     */
     public void addZ(int z){
         this.z += z;
     }
@@ -74,15 +98,27 @@ public class Vector3Di {
         this.z += vector.z;
         return this;
     }
-    
+
+    /**
+     * Resta un numero a X
+     * @param x
+     */
     public void substractX(int x){
         this.x -= x;
     }
 
+    /**
+     * Resta un numero a Y
+     * @param y
+     */
     public void substractY(int y){
         this.y -= y;
     }
 
+    /**
+     * Resta un numero a Z
+     * @param z
+     */
     public void substractZ(int z){
         this.z -= z;
     }

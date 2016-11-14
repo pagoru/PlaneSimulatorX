@@ -7,8 +7,11 @@ import java.io.IOException;
  */
 public class PlaneSimulatorX {
 
+    /**
+     * Instancia principal de la clase Window
+     */
     public static Window window;
-    
+
     public static void main(String[] args) throws IOException {
         
         window = new Window();

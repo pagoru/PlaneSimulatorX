@@ -17,13 +17,31 @@ import java.util.stream.Collectors;
  */
 public class Window {
 
+    /**
+     * Mida de la finestra
+     */
     public static final int WIDTH = 95;
+
+    /**
+     * Altura de la finestra
+     */
     public static final int HEIGHT = 24;
 
+    /**
+     * Retorna la instancia de la finestra principal (Singleton)
+     * @return
+     */
     public static Window getInstance(){
         return PlaneSimulatorX.window;
     }
 
+    /**
+     * Retorna el String de la finestra en funció del nom que es pasa al metode.
+     * També se li pasa la variable del charset per saber com codificar l'arxiu.
+     * @param path
+     * @param charset
+     * @return
+     */
     public static String getWindowString(String path, String charset) {
         try {
             return Files.readAllLines(Paths.get("src/assets/menus/" + path + ".txt"),
@@ -34,9 +52,20 @@ public class Window {
         return null;
     }
 
+    /**
+     * Textarea que es mostra en la finestra principal.
+     */
     private JTextArea textArea;
+
+    /**
+     * Frame de la finestra.
+     */
     private JFrame frame;
 
+    /**
+     * Constructor de la finestra principal. S'ocupa de crear la finestra de forma inicial.
+     * @throws IOException
+     */
     public Window() throws IOException {
 
         try {
@@ -87,10 +116,20 @@ public class Window {
 
     }
 
-    public void loadWindow(String path, String charset) throws IOException {
-        loadWindow(getWindowString(path, charset));
+    /**
+     * Carrega, passat un nom d'arxiu i una codificació de caracters d'aquesta, aquest arxiu a la finestra principal.
+     * @param fileName
+     * @param charset
+     * @throws IOException
+     */
+    public void loadWindow(String fileName, String charset) throws IOException {
+        loadWindow(getWindowString(fileName, charset));
     }
 
+    /**
+     * Carrega, passat un string de text, aquest text en la finestra principal.
+     * @param text
+     */
     public void loadWindow(String text){
 
         if(text.length() >= (WIDTH * HEIGHT)){
@@ -98,7 +137,10 @@ public class Window {
         }
         textArea.setText(text);
     }
-    
+
+    /**
+     * Obre la finestra de goodbye i passats 3 segons tanca l'aplicació.
+     */
     public void close(){
         MenuWindows.openMenu("GoodbyeWindow");
 
@@ -115,6 +157,11 @@ public class Window {
         }.start();
     }
 
+    /**
+     * Carrega, passant un nom de font, una font del sistema. En cas de no trobar-ne cap, retorna null.
+     * @param name
+     * @return
+     */
     private Font loadFont(String name){
         for(Font f : GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()){
             if(f.getName().equalsIgnoreCase(name)){
