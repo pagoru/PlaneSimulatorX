@@ -9,12 +9,25 @@ import es.pagoru.planesimulatorx.windows.MenuWindows;
  */
 public class CockpitMenuWindowThread extends Thread {
 
+    /**
+     * Instancia del menu del cockpit
+     */
     private CockpitMenuWindow cockpitMenuWindow;
 
     public CockpitMenuWindowThread(){
         this.cockpitMenuWindow = (CockpitMenuWindow) MenuWindows.getCurrentMenu();
     }
 
+    /**
+     * Executa el thread en funció de l'avió existent.
+     * 1. Comproba si els controls del yaw s'ha modificat.
+     * 2. Comproba si els controls del pitch s'han modificat.
+     * 3. Comproba la velocitat de l'avió.
+     * 4. Comproba totes les variables per tal de que l'avió es pugui enlairar.
+     * 5. Amaga el tren d'atterratge en cas de que es compleixin uns parametres.
+     * 6. Dibuixa de nou el menu
+     * x. En cas de que la finestra actual no sigui la del cockpit, es para el thread.
+     */
     @Override
     public void run() {
 
@@ -47,10 +60,6 @@ public class CockpitMenuWindowThread extends Thread {
                 }
                 int idThrottle = plane.getFlightControlThrottlePosition().ordinal();
                 plane.addThrottle(idThrottle);
-//                System.out.println(cockpit.getPitch());
-                //TODO Coords Y
-
-//                System.out.println("throttle: " + cockpit.getThrottle() + " >> " + cockpit.getFlightControlThrottlePosition());
 
                 Vector3Di vector = new Vector3Di(0, 0, 0);
                 
@@ -66,7 +75,7 @@ public class CockpitMenuWindowThread extends Thread {
                     vector.addX((int)((throttle/50) * vX));
                     vector.addZ((int)((throttle/50) * vZ));
                     
-                    if(throttle >= 400) {//THROTTLE = 400 -> 570)
+                    if(throttle >= Plane.MIN_THROTTLE_TO_UP) {//THROTTLE = 400 -> 570)
                         
                         if(pitch > 5){
                             vector.substractX((int)((throttle/100) * vX));
@@ -96,10 +105,13 @@ public class CockpitMenuWindowThread extends Thread {
                     }
                     
                 }
+                //Amagar tren d'atterratge 500metres & (300kmh) = 186mph
+                if(plane.getPosition().getY() >= 500
+                        && plane.getThrottle() >= 186
+                        && plane.isUndercarriage()){
+                    plane.setUndercarriage(false);
+                }
 
-//                vector.addX((tX);
-//                vector.addZ(tZ);
-                
                 plane.getPosition().add(vector);
                 
                 if(plane.getPosition().getY() < 0){
