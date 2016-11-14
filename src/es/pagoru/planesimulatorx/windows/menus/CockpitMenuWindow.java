@@ -90,6 +90,7 @@ public class CockpitMenuWindow extends MenuWindow {
      */
     public void removePlane(int index) {
         planeList.remove(index);
+        currentPlane = 0;
     }
 
     /**
